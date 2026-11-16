@@ -21,12 +21,12 @@ function listFiles(path = '') {
 
 const files = listFiles();
 const htmlFiles = files.filter(f => f.endsWith('.html'));
-assert.equal(htmlFiles.length, 28, 'Expected 28 Astro HTML pages');
+assert.equal(htmlFiles.length, 41, 'Expected 41 Astro HTML pages');
 
 for(const required of [
   'index.html', '404.html', 'ko/index.html', 'en/index.html',
-  'ko/credits/index.html', 'en/credits/index.html',
-  'ko/works/lovestruck/index.html', 'en/works/lovestruck/index.html',
+  'ko/credits/index.html', 'en/credits/index.html', 'ja/credits/index.html', 'ja/index.html',
+  'ko/works/lovestruck/index.html', 'en/works/lovestruck/index.html', 'ja/works/lovestruck/index.html',
   'images/lovestruck-2015-hero-desktop.webp',
   'images/lovestruck-2015-hero-mobile.webp',
   'images/lovestruck-2015-og.jpg',
@@ -63,7 +63,7 @@ for(const path of htmlFiles) {
   const og = html.match(/<meta property="og:image" content="([^"]+)"/)?.[1];
   assert.ok(og?.startsWith(expectedOrigin + 'images/'), 'Bad OG image in ' + path + ': ' + og);
 
-  for(const lang of ['ko','en']) {
+  for(const lang of ['ko','en','ja']) {
     assert.ok(html.includes('hreflang="' + lang + '"'), 'Missing alternate language ' + lang + ' in ' + path);
   }
 }
@@ -71,6 +71,7 @@ for(const path of htmlFiles) {
 const sitemap = read('sitemap-0.xml');
 assert.ok(sitemap.includes('<loc>' + expectedOrigin + 'ko/</loc>'), 'Korean homepage missing from sitemap');
 assert.ok(sitemap.includes('<loc>' + expectedOrigin + 'en/</loc>'), 'English homepage missing from sitemap');
+assert.ok(sitemap.includes('<loc>' + expectedOrigin + 'ja/</loc>'), 'Japanese homepage missing from sitemap');
 assert.ok(!sitemap.includes('localhost'), 'Localhost leaked into sitemap');
 
 const index = read('index.html');
@@ -78,4 +79,4 @@ assert.ok(index.includes('content="0;url=' + base + 'ko/"'), 'Root does not redi
 
 assert.ok(files.some(f => f.endsWith('.css')), 'No stylesheet in static artifact');
 
-console.log('PAGES_ARTIFACT_QA_PASS: 28 pages, bilingual metadata, noindex, OG, site prefix and assets');
+console.log('PAGES_ARTIFACT_QA_PASS: 41 pages, 3-language metadata, noindex, OG, site prefix and assets');

@@ -2,7 +2,7 @@ import puppeteer from 'puppeteer-core';
 const base=process.env.PREVIEW_ORIGIN||'http://127.0.0.1:4322';
 const browser=await puppeteer.launch({executablePath:'/usr/bin/google-chrome',headless:true,args:['--no-sandbox','--disable-dev-shm-usage']});
 const failures=[];
-const pages=['/ko/','/en/','/ko/credits/','/en/credits/','/ko/works/prescription/','/en/works/prescription/'];
+const pages=['/ko/','/en/','/ja/','/ko/credits/','/en/credits/','/ja/credits/','/ko/works/prescription/','/en/works/prescription/','/ja/works/prescription/'];
 try{
  for(const width of [320,390,768,1440,1920]){
   const page=await browser.newPage();
@@ -28,7 +28,7 @@ try{
       hiddenFilters:[...document.querySelectorAll('.credit-entry[hidden]')].length
     };
    });
-   const bad=response?.status()!==200||check.width>check.innerWidth+1||check.h1Overflow||check.h1Count!==1||check.hreflang.length!==3||!check.canonical||check.jsonld.length<1;
+   const bad=response?.status()!==200||check.width>check.innerWidth+1||check.h1Overflow||check.h1Count!==1||check.hreflang.length!==4||!check.canonical||check.jsonld.length<1;
    if(bad)failures.push({viewport:width,path,status:response?.status(),...check});
    console.log(bad?'FAIL':'PASS',width,path,response?.status(),'width '+check.width+'/'+width);
    if(path==='/ko/credits/'&&width===390){
@@ -46,4 +46,4 @@ try{
 if(failures.length){
  console.error('QA_FAIL',JSON.stringify(failures.map(x=>({viewport:x.viewport,path:x.path,status:x.status,width:x.width,innerWidth:x.innerWidth,h1Overflow:x.h1Overflow,filter:x.filter})),null,2));
  process.exitCode=1;
-}else console.log('QA_PASS: 30 routes/viewport combinations, credit filter');
+}else console.log('QA_PASS: 45 routes/viewport combinations, credit filter');

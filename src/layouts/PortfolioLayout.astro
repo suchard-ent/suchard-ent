@@ -1,6 +1,7 @@
 ---
 import '../styles/site.css';
-import type { Lang } from '../data/credits';
+import {locales} from '../data/credits';
+import type {Lang} from '../data/credits';
 interface Props {
   lang: Lang;
   title: string;
@@ -42,23 +43,27 @@ const profile={
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin="anonymous" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/wanteddev/wanted-sans@v1.0.3/packages/wanted-sans/fonts/webfonts/variable/split/WantedSansVariable.min.css" />
+  {lang==='ja' && <>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600&display=swap" />
+  </>}
   <meta name="color-scheme" content="dark" />
   <meta name="theme-color" content="#0b0b0b" />
   <title>{title}</title>
   <meta name="description" content={description} />
   <meta name="robots" content={production?'index,follow,max-image-preview:large':'noindex,nofollow'} />
   <link rel="canonical" href={canonical} />
-  <link rel="alternate" hreflang="ko" href={absolute('ko')} />
-  <link rel="alternate" hreflang="en" href={absolute('en')} />
+  {locales.map(locale=><link rel="alternate" hreflang={locale} href={absolute(locale)} />)}
   <link rel="alternate" hreflang="x-default" href={absolute('en')} />
   <meta property="og:type" content={type==='profile'?'profile':'article'} />
   <meta property="og:site_name" content="Suchard" />
-  <meta property="og:locale" content={lang==='ko'?'ko_KR':'en_US'} />
+  <meta property="og:locale" content={lang==='ko'?'ko_KR':lang==='ja'?'ja_JP':'en_US'} />
   <meta property="og:title" content={title} />
   <meta property="og:description" content={description} />
   <meta property="og:url" content={canonical} />
   <meta property="og:image" content={new URL(base+'images/'+image,root).toString()} />
-  <meta property="og:image:alt" content={image==='lovestruck-2015-og.jpg'?(lang==='ko'?'슈샤드 — 2015년 Lovestruck 프로모션 사진':'Suchard — 2015 Lovestruck promotional photograph'):title} />
+  <meta property="og:image:alt" content={image==='lovestruck-2015-og.jpg'?(lang==='ko'?'슈샤드 — 2015년 Lovestruck 프로모션 사진':lang==='ja'?'SUCHARD — 2015年のLovestruckプロモーション写真':'Suchard — 2015 Lovestruck promotional photograph'):title} />
   <meta name="twitter:image" content={new URL(base+'images/'+image,root).toString()} />
   <meta name="twitter:card" content="summary_large_image" />
   <link rel="icon" href={base+'favicon.svg'} type="image/svg+xml" />

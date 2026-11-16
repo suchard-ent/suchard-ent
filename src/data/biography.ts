@@ -28,6 +28,20 @@ export const biography = {
       {eyebrow:'2015 · SOLO SINGLE',title:'Suchard — Lovestruck',subtitle:'The 2015 announcement of Suchard’s first solo single, Lovestruck.',image:'lovestruck-2015-archive.webp',visual:'photo',href:'https://www.etoday.co.kr/news/view/1224758',link:'Read announcement'},
       {eyebrow:'2016 · RELEASE CREDITS',title:'Suchard — Prescription',subtitle:'Composition, arrangement, performance, production and mixing credits for Prescription.',image:'solo-prescription.webp',href:'https://blendcompany.bandcamp.com/album/prescription',link:'View credits'}
     ]
+  },
+  ja: {
+    heroLine: 'Mongooseでの演奏、ソロ作品、他のアーティストとの制作・演奏参加。',
+    aboutParas: [
+      'SUCHARD（パク・ヒジョン）は、韓国のバンドMongooseでベースとギターを担当。Mongooseのセカンドアルバム『Dancing Zoo』（2005年）は、2006年の韓国大衆音楽賞で最優秀モダンロック・アルバム賞を受賞した。',
+      '2015年に初のソロ・シングル『Lovestruck』を発表。翌年の『처방전（Prescription）』では、作曲・編曲に加え、ボーカル、楽器演奏、プロデュース、ミキシングを手がけた。',
+      'GUSの『Next To Me』、シン・ビョンソプの『좋아요』、Drainの『사랑, 아마도』、Starchisの『궁금한게 있어』などにも、作曲・編曲・プロデュースやセッション演奏で参加している。'
+    ],
+    pressCards: [
+      {eyebrow:'2006 · KOREAN MUSIC AWARDS',title:'Mongoose — Dancing Zoo',subtitle:'2006年の韓国大衆音楽賞で、Mongooseが最優秀モダンロック・アルバム賞を受賞。',image:'album-dancing.webp',href:'https://koreanmusicawards.com/project/%EB%AA%BD%EA%B5%AC%EC%8A%A4-dancing-zoo-2/',link:'受賞記録を見る'},
+      {eyebrow:'2011 · INTERVIEW',title:'Mongoose — Cosmic Dancer',subtitle:'2011年、『Cosmic Dancer』発表当時のMongooseのインタビュー。',image:'suchard-live-bw.webp',visual:'photo',href:'https://v.daum.net/v/M0N2PV3l8D',link:'インタビューを読む'},
+      {eyebrow:'2015 · SOLO SINGLE',title:'SUCHARD — Lovestruck',subtitle:'初のソロ・シングル『Lovestruck』の発表を伝える2015年の記事。',image:'lovestruck-2015-archive.webp',visual:'photo',href:'https://www.etoday.co.kr/news/view/1224758',link:'記事を読む'},
+      {eyebrow:'2016 · RELEASE CREDITS',title:'SUCHARD — 처방전',subtitle:'『처방전』の作曲・編曲・演奏・プロデュース・ミキシングのクレジット。',image:'solo-prescription.webp',href:'https://blendcompany.bandcamp.com/album/prescription',link:'クレジットを見る'}
+    ]
   }
 } as const;
 

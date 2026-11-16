@@ -8,6 +8,8 @@
   몽구스 · 솔로 · 프로듀싱
 
   Mongoose · Solo · Production
+
+  [한국어](https://suchard-ent.github.io/suchard-ent/ko/) · [English](https://suchard-ent.github.io/suchard-ent/en/) · [日本語](https://suchard-ent.github.io/suchard-ent/ja/)
 </div>
 
 ---
@@ -23,6 +25,12 @@
 Suchard (Park Hee-jung) played bass and guitar in the Korean band **Mongoose**. The band's second album, *Dancing Zoo* (2005), won **Best Modern Rock Album** at the 2006 Korean Music Awards.
 
 He released his first solo single, **Lovestruck**, in 2015. On **Prescription** (2016), he composed and arranged the music, performed vocals and instruments, and handled production and mixing. He has also worked on recordings by GUS, Shin Byung-seop, Drain and Starchis.
+
+**日本語**
+
+SUCHARD（パク・ヒジョン）は、韓国のバンド**Mongoose**でベースとギターを担当。Mongooseのセカンドアルバム『Dancing Zoo』（2005年）は、2006年の韓国大衆音楽賞で最優秀モダンロック・アルバム賞を受賞した。
+
+2015年に初のソロ・シングル**『Lovestruck』**を発表。翌年の**『처방전（Prescription）』**では、作曲・編曲、ボーカル、楽器演奏、プロデュース、ミキシングを手がけた。GUS、シン・ビョンソプ、Drain、Starchisの作品にも制作や演奏で参加している。
 
 ---
 

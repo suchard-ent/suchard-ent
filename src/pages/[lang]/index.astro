@@ -1,9 +1,10 @@
 ---
 import PortfolioLayout from '../../layouts/PortfolioLayout.astro';
 import SuchardHome from '../../components/SuchardHome.astro';
+import {locales} from '../../data/credits';
 import type {Lang} from '../../data/credits';
 import {getHomeMeta} from '../../data/seo-copy';
-export function getStaticPaths(){return [{params:{lang:'ko'}},{params:{lang:'en'}}];}
+export function getStaticPaths(){return locales.map(lang=>({params:{lang}}));}
 const lang=Astro.params.lang as Lang;
 const meta=getHomeMeta(lang);
 ---

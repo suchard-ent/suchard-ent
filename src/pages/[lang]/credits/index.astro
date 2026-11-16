@@ -1,11 +1,11 @@
 ---
 import PortfolioLayout from '../../../layouts/PortfolioLayout.astro';
 import PortfolioHeader from '../../../components/PortfolioHeader.astro';
-import {works} from '../../../data/credits';
+import {locales,works} from '../../../data/credits';
 import type {Lang} from '../../../data/credits';
 import {getText} from '../../../data/portfolio-copy';
 import {getCreditsMeta} from '../../../data/seo-copy';
-export function getStaticPaths(){return [{params:{lang:'ko'}},{params:{lang:'en'}}];}
+export function getStaticPaths(){return locales.map(lang=>({params:{lang}}));}
 const lang=Astro.params.lang as Lang;
 const t=getText(lang);
 const meta=getCreditsMeta(lang);
@@ -20,7 +20,7 @@ const records=[...works].sort((a,b)=>Number(b.year)-Number(a.year));
     <h1>{t.allWorks}</h1>
     <p class="intro">{t.musicianDetails}</p>
     <div class="credits-controls" aria-label={t.categoryLabel}>
-      <button type="button" data-filter="all" aria-pressed="true">{lang==='ko'?'전체':'All'}</button>
+      <button type="button" data-filter="all" aria-pressed="true">{t.all}</button>
       {(['band','solo','production','session'] as const).map(cat=><button type="button" data-filter={cat} aria-pressed="false">{t.category[cat]}</button>)}
     </div>
     <div class="credit-entries" id="credit-entries">

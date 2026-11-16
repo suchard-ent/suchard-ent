@@ -23,7 +23,10 @@ export const uiCopy = {
     allWorks:'주요 음반 및 참여작',
     categoryLabel:'참여 유형',
     pageLabel:'참여 크레딧',
-    returnHome:'처음으로 돌아가기'
+    returnHome:'처음으로 돌아가기',
+    all:'전체',
+    backToTop:'맨 위로',
+    albumArt:'앨범 표지'
   },
   en: {
     name: 'Suchard',
@@ -47,7 +50,37 @@ export const uiCopy = {
     allWorks:'Selected recordings and credits',
     categoryLabel:'Contribution',
     pageLabel:'Recording credits',
-    returnHome:'Back to home'
+    returnHome:'Back to home',
+    all:'All',
+    backToTop:'Back to top',
+    albumArt:'Album artwork'
+  },
+  ja: {
+    name: 'SUCHARD',
+    role: 'ミュージシャン · 作曲家 · プロデューサー',
+    nav: {music:'音楽', about:'プロフィール', press:'活動記録', contact:'お問い合わせ', credits:'参加作品'},
+    eyebrow: {music:'MUSIC', about:'ABOUT', press:'ARCHIVE', contact:'CONTACT', follow:'LISTEN'},
+    discography:'主なディスコグラフィー',
+    aboutTitle:'音楽家・\nプロデューサー',
+    pressTitle:'活動記録',
+    followTitle:'音楽を聴く',
+    contactTitle:'制作・演奏の\nご相談',
+    contactText:'作曲・編曲・プロデュース、ベース／ギターの演奏依頼について。',
+    contactPending:'お問い合わせ先は準備中です',
+    musicianDetails:'Mongooseでの作品、SUCHARDのソロ音源、他のアーティストとの制作・演奏参加作品を紹介します。',
+    category: {band:'バンド',solo:'ソロ',production:'プロデュース',session:'セッション'},
+    year:'リリース',
+    listen:'音楽を聴く',
+    back:'作品一覧に戻る',
+    more:'作品の詳細を見る',
+    scroll:'スクロール',
+    allWorks:'主な音源と参加作品',
+    categoryLabel:'参加形態',
+    pageLabel:'参加クレジット',
+    returnHome:'トップに戻る',
+    all:'すべて',
+    backToTop:'ページ上部へ',
+    albumArt:'ジャケット画像'
   }
 } as const;
 
@@ -65,6 +98,13 @@ const sourceLabels: Record<Lang, Record<SourceKind, string>> = {
     award:'View award',
     listing:'View listing',
     video:'Watch video'
+  },
+  ja: {
+    credits:'クレジットを見る',
+    release:'音源情報を見る',
+    award:'受賞記録を見る',
+    listing:'作品情報を見る',
+    video:'動画を見る'
   }
 };
 

@@ -1,5 +1,6 @@
 ---
-import type { Lang } from '../data/credits';
+import {locales} from '../data/credits';
+import type {Lang} from '../data/credits';
 import {getText} from '../data/portfolio-copy';
 interface Props {lang:Lang;path?:string;}
 const {lang,path=''}=Astro.props;
@@ -10,15 +11,16 @@ const langPath=(l:Lang)=>base+l+'/'+(path?path.replace(/^\/|\/$/g,'')+'/':'');
 ---
 <header class="site-header">
   <a class="wordmark" href={home} aria-label="Suchard home">SUCHARD</a>
-  <nav class="primary-nav" aria-label={lang==='ko'?'사이트 탐색':'Site navigation'}>
+  <nav class="primary-nav" aria-label={lang==='ko'?'사이트 탐색':lang==='ja'?'サイト内ナビゲーション':'Site navigation'}>
     <a href={home+'#music'}>{t.nav.music}</a>
     <a href={home+'#about'}>{t.nav.about}</a>
     <a href={home+'#press'}>{t.nav.press}</a>
     <a href={home+'#contact'}>{t.nav.contact}</a>
   </nav>
   <nav class="language-nav" aria-label="Language">
-    <a href={langPath('ko')} aria-current={lang==='ko'?'page':undefined}>KO</a>
-    <span aria-hidden="true">/</span>
-    <a href={langPath('en')} aria-current={lang==='en'?'page':undefined}>EN</a>
+    {locales.map((locale,i)=><>
+      {i>0 && <span aria-hidden="true">/</span>}
+      <a href={langPath(locale)} hreflang={locale} lang={locale} aria-current={lang===locale?'page':undefined}>{locale.toUpperCase()}</a>
+    </>)}
   </nav>
 </header>

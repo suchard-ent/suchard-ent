@@ -13,7 +13,7 @@ const records=[...works].sort((a,b)=>Number(b.year)-Number(a.year));
 ---
 <main class="suchard-site">
   <section class="portfolio-hero" id="top" aria-label="Suchard">
-    <div class="hero-photograph"><picture><source media="(max-width: 540px)" srcset={image('lovestruck-2015-hero-mobile.webp')} /><img src={image('lovestruck-2015-hero-desktop.webp')} alt={lang==='ko'?'2015년 Lovestruck 발표 당시, 강변에서 기타를 들고 서 있는 슈샤드':'Suchard holding an electric guitar beside a river in a 2015 Lovestruck promotional photo'} fetchpriority="high" /></picture></div>
+    <div class="hero-photograph"><picture><source media="(max-width: 540px)" srcset={image('lovestruck-2015-hero-mobile.webp')} /><img src={image('lovestruck-2015-hero-desktop.webp')} alt={lang==='ko'?'2015년 Lovestruck 발표 당시, 강변에서 기타를 들고 서 있는 슈샤드':lang==='ja'?'2015年の『Lovestruck』発表時、川沿いでギターを手にするSUCHARD':'Suchard holding an electric guitar beside a river in a 2015 Lovestruck promotional photo'} fetchpriority="high" /></picture></div>
     <div class="hero-shade"></div>
     <PortfolioHeader lang={lang}/>
     <div class="hero-copy">
@@ -23,7 +23,7 @@ const records=[...works].sort((a,b)=>Number(b.year)-Number(a.year));
     </div>
     <a href="#music" class="scroll-indicator">{t.scroll}<span aria-hidden="true">↓</span></a>
     <span class="edge-label" aria-hidden="true">MUSICIAN / PRODUCER</span>
-    <a class="hero-photo-credit" href="https://www.etoday.co.kr/news/view/1224758" target="_blank" rel="noopener noreferrer" aria-label={lang==='ko'?'Lovestruck 2015 사진 출처':'Lovestruck 2015 photo source'}>LOVESTRUCK / 2015 <span aria-hidden="true">↗</span></a>
+    <a class="hero-photo-credit" href="https://www.etoday.co.kr/news/view/1224758" target="_blank" rel="noopener noreferrer" aria-label={lang==='ko'?'Lovestruck 2015 사진 출처':lang==='ja'?'2015年のLovestruck写真の出典':'Lovestruck 2015 photo source'}>LOVESTRUCK / 2015 <span aria-hidden="true">↗</span></a>
   </section>
 
   <section id="music" class="music-section page-section">
@@ -36,7 +36,7 @@ const records=[...works].sort((a,b)=>Number(b.year)-Number(a.year));
       <div class="release-grid">
         {records.map(work=><article class="release-card">
           <a href={root+'works/'+work.id+'/'} class="release-art-link" aria-label={work.title+' — '+t.more}>
-            <img src={image(work.image)} alt={work.title+' album art'} loading="lazy" width="400" height="400" />
+            <img src={image(work.image)} alt={work.title+' — '+t.albumArt} loading="lazy" width="400" height="400" />
           </a>
           <h3><a href={root+'works/'+work.id+'/'}>{work.title}</a></h3>
           <p class="release-meta">{work.artist} <span aria-hidden="true">·</span> {work.year}</p>
@@ -55,11 +55,11 @@ const records=[...works].sort((a,b)=>Number(b.year)-Number(a.year));
     <div class="section-container about-layout">
       <div class="about-visuals">
         <figure class="about-portrait">
-          <img src={image('mongoose-2011-group-bw.webp')} alt={lang==='ko'?'몽구스 멤버 세 명이 함께 찍은 활동 당시 공식 사진':'Archival group photograph of three Mongoose members'} loading="lazy" />
-          <figcaption>{lang==='ko'?'MONGOOSE / 2011 · 밴드 활동 당시':'MONGOOSE / 2011 · Band years'}</figcaption>
+          <img src={image('mongoose-2011-group-bw.webp')} alt={lang==='ko'?'몽구스 멤버 세 명이 함께 찍은 활동 당시 공식 사진':lang==='ja'?'Mongooseのメンバー3人が写った当時の写真':'Archival group photograph of three Mongoose members'} loading="lazy" />
+          <figcaption>{lang==='ko'?'MONGOOSE / 2011 · 밴드 활동 당시':lang==='ja'?'MONGOOSE / 2011 · バンド活動時':'MONGOOSE / 2011 · Band years'}</figcaption>
         </figure>
-        <a class="about-solo-strip" href={root+'works/lovestruck/'} aria-label={lang==='ko'?'2015년 솔로 싱글 Lovestruck 상세':'2015 solo single Lovestruck details'}>
-          <img src={image('lovestruck-2015-about.webp')} alt={lang==='ko'?'2015년 Lovestruck 프로모션 사진':'2015 Lovestruck promotional photograph'} loading="lazy" />
+        <a class="about-solo-strip" href={root+'works/lovestruck/'} aria-label={lang==='ko'?'2015년 솔로 싱글 Lovestruck 상세':lang==='ja'?'2015年のソロ・シングル『Lovestruck』詳細':'2015 solo single Lovestruck details'}>
+          <img src={image('lovestruck-2015-about.webp')} alt={lang==='ko'?'2015년 Lovestruck 프로모션 사진':lang==='ja'?'2015年の『Lovestruck』プロモーション写真':'2015 Lovestruck promotional photograph'} loading="lazy" />
           <span>2015 / LOVESTRUCK <span aria-hidden="true">↗</span></span>
         </a>
       </div>
@@ -115,6 +115,6 @@ const records=[...works].sort((a,b)=>Number(b.year)-Number(a.year));
   <footer class="portfolio-footer">
     <span>© 2026 SUCHARD</span>
     <span>MONGOOSE · SOLO · PRODUCTION</span>
-    <a href="#top">BACK TO TOP ↑</a>
+    <a href="#top">{t.backToTop} ↑</a>
   </footer>
 </main>

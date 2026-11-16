@@ -1,13 +1,13 @@
 ---
 import PortfolioLayout from '../../../layouts/PortfolioLayout.astro';
 import PortfolioHeader from '../../../components/PortfolioHeader.astro';
-import {works} from '../../../data/credits';
+import {locales,works} from '../../../data/credits';
 import type {Lang,Work} from '../../../data/credits';
 import {getText} from '../../../data/portfolio-copy';
 import {getSourceLabel} from '../../../data/ui-copy';
 import {getWorkMeta} from '../../../data/seo-copy';
 export function getStaticPaths(){
-  return ['ko','en'].flatMap(lang=>works.map(w=>({params:{lang,slug:w.id},props:{work:w}})));
+  return locales.flatMap(lang=>works.map(w=>({params:{lang,slug:w.id},props:{work:w}})));
 }
 interface Props {work:Work;}
 const {work}=Astro.props;
@@ -33,14 +33,14 @@ const jsonld={
     <main class="subpage">
       <a class="detail-back" href={base+lang+'/credits/'}>← {t.back}</a>
       {work.id==='lovestruck' && <figure class="work-photo-feature">
-        <img src={base+'images/lovestruck-2015-detail.webp'} alt={lang==='ko'?'2015년 싱글 Lovestruck 발매 당시 촬영된 강변의 슈샤드':'Suchard by the riverside in the 2015 Lovestruck promotional photo'} fetchpriority="high" />
+        <img src={base+'images/lovestruck-2015-detail.webp'} alt={lang==='ko'?'2015년 싱글 Lovestruck 발매 당시 촬영된 강변의 슈샤드':lang==='ja'?'2015年の『Lovestruck』発表当時、川沿いで撮影されたSUCHARD':'Suchard by the riverside in the 2015 Lovestruck promotional photo'} fetchpriority="high" />
         <figcaption>
           <span>LOVESTRUCK / SUCHARD — 2015</span>
-          <a href="https://www.etoday.co.kr/news/view/1224758" target="_blank" rel="noopener noreferrer">{lang==='ko'?'사진 제공: 블렌드 컴퍼니 / 이투데이 기사 ↗':'Photo provided by Blend Company / eToday ↗'}</a>
+          <a href="https://www.etoday.co.kr/news/view/1224758" target="_blank" rel="noopener noreferrer">{lang==='ko'?'사진 제공: 블렌드 컴퍼니 / 이투데이 기사 ↗':lang==='ja'?'写真提供：Blend Company / eTodayの記事 ↗':'Photo provided by Blend Company / eToday ↗'}</a>
         </figcaption>
       </figure>}
       <div class="work-grid">
-        <img src={base+'images/'+work.image} alt={work.title+' album artwork'} width="900" height="900"/>
+        <img src={base+'images/'+work.image} alt={work.title+' — '+t.albumArt} width="900" height="900"/>
         <div>
           <p class="section-eyebrow">{t.pageLabel} / {t.category[work.category]}</p>
           <p class="detail-year">{work.year} / {work.artist}</p>

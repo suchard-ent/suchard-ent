@@ -13,7 +13,7 @@ try {
     const page = await browser.newPage();
     await page.setViewport({width, height: 900, deviceScaleFactor: 1});
     await page.setCacheEnabled(false);
-    for (const lang of ['ko','en']) {
+    for (const lang of ['ko','en','ja']) {
       for (const suffix of ['', 'works/lovestruck/']) {
         const url = origin + '/' + lang + '/' + suffix;
         const response = await page.goto(url, {waitUntil:'networkidle0',timeout:30000});
@@ -71,5 +71,5 @@ if (failures) {
   console.error('VERIFICATION FAILED: '+failures);
   process.exitCode=1;
 } else {
-  console.log('LOVESTRUCK_VISUAL_QA_PASS: 20 route/viewport checks');
+  console.log('LOVESTRUCK_VISUAL_QA_PASS: 30 route/viewport checks');
 }
