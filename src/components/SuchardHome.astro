@@ -2,6 +2,7 @@
 import {works} from '../data/credits';
 import type {Lang} from '../data/credits';
 import {getText} from '../data/portfolio-copy';
+import {contactEmail} from '../data/ui-copy';
 import PortfolioHeader from './PortfolioHeader.astro';
 interface Props {lang:Lang;}
 const {lang}=Astro.props;
@@ -23,7 +24,7 @@ const records=[...works].sort((a,b)=>Number(b.year)-Number(a.year));
     </div>
     <a href="#music" class="scroll-indicator">{t.scroll}<span aria-hidden="true">↓</span></a>
     <span class="edge-label" aria-hidden="true">MUSICIAN / PRODUCER</span>
-    <a class="hero-photo-credit" href="https://www.etoday.co.kr/news/view/1224758" target="_blank" rel="noopener noreferrer" aria-label={lang==='ko'?'Lovestruck 2015 사진 출처':lang==='ja'?'2015年のLovestruck写真の出典':'Lovestruck 2015 photo source'}>LOVESTRUCK / 2015 <span aria-hidden="true">↗</span></a>
+    <a class="hero-photo-credit" href="https://m.entertain.naver.com/home/article/468/0000068775" target="_blank" rel="noopener noreferrer" aria-label={lang==='ko'?'Lovestruck 2015 사진 출처':lang==='ja'?'2015年のLovestruck写真の出典':'Lovestruck 2015 photo source'}>LOVESTRUCK / 2015 <span aria-hidden="true">↗</span></a>
   </section>
 
   <section id="music" class="music-section page-section">
@@ -108,7 +109,7 @@ const records=[...works].sort((a,b)=>Number(b.year)-Number(a.year));
         <p class="section-eyebrow">{t.eyebrow.contact}</p>
         <h2 class="section-heading multiline">{t.contactTitle.split('\n').map(line=><span>{line}</span>)}</h2>
         <p class="contact-copy">{t.contactText}</p>
-        <p class="contact-pending">{t.contactPending}</p>
+        <a class="contact-email" href={"mailto:"+contactEmail}>{contactEmail} <span aria-hidden="true">↗</span></a>
       </div>
     </div>
   </section>

@@ -1,5 +1,7 @@
 import type {Lang, SourceKind} from './credits';
 
+export const contactEmail = 'suchard337@gmail.com';
+
 export const uiCopy = {
   ko: {
     name: '슈샤드',
@@ -10,10 +12,9 @@ export const uiCopy = {
     aboutTitle: 'Musician &\nProducer',
     pressTitle: '활동 기록',
     followTitle: '음악 듣기',
-    contactTitle: '작업\n문의',
+    contactTitle: '작업 문의',
     contactText: '작곡·편곡·프로듀싱 및 베이스·기타 세션 문의',
-    contactPending: '연락처 준비 중',
-    musicianDetails: '몽구스의 음반, 슈샤드의 솔로 싱글과 다른 음악가의 제작 참여작을 모았습니다.',
+        musicianDetails: '몽구스의 음반, 슈샤드의 솔로 싱글과 다른 음악가의 제작 참여작을 모았습니다.',
     category: {band:'밴드',solo:'솔로',production:'프로듀싱',session:'세션'},
     year:'발매',
     listen:'음악 듣기',
@@ -39,8 +40,7 @@ export const uiCopy = {
     followTitle:'Listen',
     contactTitle:'Contact',
     contactText:'For composition, arrangement, production, and bass or guitar sessions.',
-    contactPending:'Enquiry address coming soon',
-    musicianDetails:'Selected releases with Mongoose, Suchard’s solo recordings and credits with other artists.',
+        musicianDetails:'Selected releases with Mongoose, Suchard’s solo recordings and credits with other artists.',
     category: {band:'Band',solo:'Solo',production:'Production',session:'Session'},
     year:'Released',
     listen:'Listen',
@@ -66,8 +66,7 @@ export const uiCopy = {
     followTitle:'音楽を聴く',
     contactTitle:'制作・演奏の\nご相談',
     contactText:'作曲・編曲・プロデュース、ベース／ギターの演奏依頼について。',
-    contactPending:'お問い合わせ先は準備中です',
-    musicianDetails:'Mongooseでの作品、SUCHARDのソロ音源、他のアーティストとの制作・演奏参加作品を紹介します。',
+        musicianDetails:'Mongooseでの作品、SUCHARDのソロ音源、他のアーティストとの制作・演奏参加作品を紹介します。',
     category: {band:'バンド',solo:'ソロ',production:'プロデュース',session:'セッション'},
     year:'リリース',
     listen:'音楽を聴く',

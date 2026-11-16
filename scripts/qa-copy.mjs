@@ -18,14 +18,15 @@ expectText('dist/ko/index.html', [
   '최우수 모던록 음반을 수상했다.',
   '활동 기록',
   '주요 음반 및 참여작',
-  '연락처 준비 중',
+  '작업 문의',
+  'mailto:suchard337@gmail.com',
   'WantedSansVariable.min.css'
 ]);
 expectText('dist/en/index.html', [
   'Recordings with Mongoose, solo releases, and work with other artists.',
   'He also worked on GUS',
-  'The 2015 announcement',
-  'Enquiry address coming soon',
+  'Sports Seoul reported',
+  'mailto:suchard337@gmail.com',
   'WantedSansVariable.min.css'
 ]);
 rejectText('dist/ko/index.html', [
@@ -47,7 +48,7 @@ expectText('dist/ja/index.html', [
   '韓国大衆音楽賞',
   '主なディスコグラフィー',
   '活動記録',
-  'お問い合わせ先は準備中です',
+  'mailto:suchard337@gmail.com',
   'fonts.googleapis.com/css2?family=Noto+Sans+JP'
 ]);
 expectText('dist/ja/credits/index.html', [
@@ -56,8 +57,17 @@ expectText('dist/ja/credits/index.html', [
   'バンド',
   'プロデュース'
 ]);
+const newsLinks=[
+  'https://m.entertain.naver.com/home/article/312/0000008050',
+  'https://m.entertain.naver.com/home/article/468/0000068775'
+];
 for(const lang of ['ko','en','ja']){
  const home=read('dist/'+lang+'/index.html');
+ for(const url of newsLinks)assert.ok(home.includes(url),lang+' missing Naver article '+url);
+ assert.ok(home.includes('mailto:suchard337@gmail.com'),lang+' missing contact mailto');
+ for(const obsolete of ['연락처 준비 중','Enquiry address coming soon','お問い合わせ先は準備中です'])
+   assert.ok(!home.includes(obsolete),lang+' retained placeholder '+obsolete);
+
  for(const target of ['ko','en','ja']) {
    assert.ok(home.includes('hreflang="'+target+'"'),lang+' missing alternate '+target);
    assert.ok(home.includes('hreflang="'+target+'" lang="'+target+'"'),lang+' missing language switch '+target);
@@ -72,6 +82,9 @@ for (const lang of ['ko','en','ja']) {
     'Next To Me'
   ]);
   rejectText('dist/'+lang+'/credits/index.html', ['COMPLETE INDEX / VERIFIED RELEASES']);
+  expectText('dist/'+lang+'/works/lovestruck/index.html', [
+    'https://m.entertain.naver.com/home/article/468/0000068775'
+  ]);
   expectText('dist/'+lang+'/works/prescription/index.html', lang==='ko'
     ? ['작사: 슈샤드, Blues Lee','마스터링: 권남우','크레딧 확인']
     : lang==='ja' ? ['作詞：SUCHARD、Blues Lee','マスタリング：Kwon Nam-woo','クレジットを見る']

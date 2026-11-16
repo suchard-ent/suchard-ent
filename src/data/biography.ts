@@ -10,8 +10,8 @@ export const biography = {
     ],
     pressCards: [
       {eyebrow:'2006 · KOREAN MUSIC AWARDS',title:'몽구스 《Dancing Zoo》',subtitle:'2006년 한국대중음악상 최우수 모던록 음반. 몽구스의 수상 기록.',image:'album-dancing.webp',href:'https://koreanmusicawards.com/project/%EB%AA%BD%EA%B5%AC%EC%8A%A4-dancing-zoo-2/',link:'수상 기록 보기'},
-      {eyebrow:'2011 · INTERVIEW',title:'몽구스 《Cosmic Dancer》',subtitle:'2011년 《Cosmic Dancer》 발매 당시 밴드의 음악과 작업 과정을 다룬 인터뷰.',image:'suchard-live-bw.webp',visual:'photo',href:'https://v.daum.net/v/M0N2PV3l8D',link:'인터뷰 읽기'},
-      {eyebrow:'2015 · SOLO SINGLE',title:'슈샤드 〈Lovestruck〉',subtitle:'첫 솔로 싱글 〈Lovestruck〉 발표를 다룬 2015년 기사.',image:'lovestruck-2015-archive.webp',visual:'photo',href:'https://www.etoday.co.kr/news/view/1224758',link:'발매 기사 읽기'},
+      {eyebrow:'2011 · INTERVIEW',title:'몽구스 — 인디 10 인터뷰',subtitle:'2011년 6월 21일 텐아시아의 몽구스 인터뷰. 《Cosmic Dancer》와 당시 밴드 활동에 관한 이야기.',image:'suchard-live-bw.webp',visual:'photo',href:'https://m.entertain.naver.com/home/article/312/0000008050',link:'인터뷰 읽기'},
+      {eyebrow:'2015 · SOLO SINGLE',title:'슈샤드 〈Lovestruck〉',subtitle:'2015년 10월 28일 스포츠서울에 실린 첫 솔로 싱글 〈Lovestruck〉 발표 기사.',image:'lovestruck-2015-archive.webp',visual:'photo',href:'https://m.entertain.naver.com/home/article/468/0000068775',link:'발매 기사 읽기'},
       {eyebrow:'2016 · RELEASE CREDITS',title:'슈샤드 〈처방전〉',subtitle:'〈처방전〉의 작곡·편곡·연주·프로듀싱·믹싱 크레딧.',image:'solo-prescription.webp',href:'https://blendcompany.bandcamp.com/album/prescription',link:'크레딧 확인'}
     ]
   },
@@ -24,8 +24,8 @@ export const biography = {
     ],
     pressCards: [
       {eyebrow:'2006 · KOREAN MUSIC AWARDS',title:'Mongoose — Dancing Zoo',subtitle:'Best Modern Rock Album at the 2006 Korean Music Awards, awarded to Mongoose.',image:'album-dancing.webp',href:'https://koreanmusicawards.com/project/%EB%AA%BD%EA%B5%AC%EC%8A%A4-dancing-zoo-2/',link:'View award'},
-      {eyebrow:'2011 · INTERVIEW',title:'Mongoose — Cosmic Dancer',subtitle:'A 2011 interview about Mongoose and the making of Cosmic Dancer.',image:'suchard-live-bw.webp',visual:'photo',href:'https://v.daum.net/v/M0N2PV3l8D',link:'Read interview'},
-      {eyebrow:'2015 · SOLO SINGLE',title:'Suchard — Lovestruck',subtitle:'The 2015 announcement of Suchard’s first solo single, Lovestruck.',image:'lovestruck-2015-archive.webp',visual:'photo',href:'https://www.etoday.co.kr/news/view/1224758',link:'Read announcement'},
+      {eyebrow:'2011 · INTERVIEW',title:'Mongoose — Indie 10 Interview',subtitle:'A June 21, 2011 TenAsia interview with Mongoose on Cosmic Dancer and the band.',image:'suchard-live-bw.webp',visual:'photo',href:'https://m.entertain.naver.com/home/article/312/0000008050',link:'Read interview'},
+      {eyebrow:'2015 · SOLO SINGLE',title:'Suchard — Lovestruck',subtitle:'Sports Seoul reported the release of Suchard’s first solo single on October 28, 2015.',image:'lovestruck-2015-archive.webp',visual:'photo',href:'https://m.entertain.naver.com/home/article/468/0000068775',link:'Read article'},
       {eyebrow:'2016 · RELEASE CREDITS',title:'Suchard — Prescription',subtitle:'Composition, arrangement, performance, production and mixing credits for Prescription.',image:'solo-prescription.webp',href:'https://blendcompany.bandcamp.com/album/prescription',link:'View credits'}
     ]
   },
@@ -38,8 +38,8 @@ export const biography = {
     ],
     pressCards: [
       {eyebrow:'2006 · KOREAN MUSIC AWARDS',title:'Mongoose — Dancing Zoo',subtitle:'2006年の韓国大衆音楽賞で、Mongooseが最優秀モダンロック・アルバム賞を受賞。',image:'album-dancing.webp',href:'https://koreanmusicawards.com/project/%EB%AA%BD%EA%B5%AC%EC%8A%A4-dancing-zoo-2/',link:'受賞記録を見る'},
-      {eyebrow:'2011 · INTERVIEW',title:'Mongoose — Cosmic Dancer',subtitle:'2011年、『Cosmic Dancer』発表当時のMongooseのインタビュー。',image:'suchard-live-bw.webp',visual:'photo',href:'https://v.daum.net/v/M0N2PV3l8D',link:'インタビューを読む'},
-      {eyebrow:'2015 · SOLO SINGLE',title:'SUCHARD — Lovestruck',subtitle:'初のソロ・シングル『Lovestruck』の発表を伝える2015年の記事。',image:'lovestruck-2015-archive.webp',visual:'photo',href:'https://www.etoday.co.kr/news/view/1224758',link:'記事を読む'},
+      {eyebrow:'2011 · INTERVIEW',title:'Mongoose — インディ10 インタビュー',subtitle:'2011年6月21日のTenAsia掲載。『Cosmic Dancer』やバンド活動について語るインタビュー。',image:'suchard-live-bw.webp',visual:'photo',href:'https://m.entertain.naver.com/home/article/312/0000008050',link:'インタビューを読む'},
+      {eyebrow:'2015 · SOLO SINGLE',title:'SUCHARD — Lovestruck',subtitle:'2015年10月28日、Sports Seoulに掲載された初のソロ・シングル『Lovestruck』のリリース記事。',image:'lovestruck-2015-archive.webp',visual:'photo',href:'https://m.entertain.naver.com/home/article/468/0000068775',link:'記事を読む'},
       {eyebrow:'2016 · RELEASE CREDITS',title:'SUCHARD — 처방전',subtitle:'『처방전』の作曲・編曲・演奏・プロデュース・ミキシングのクレジット。',image:'solo-prescription.webp',href:'https://blendcompany.bandcamp.com/album/prescription',link:'クレジットを見る'}
     ]
   }

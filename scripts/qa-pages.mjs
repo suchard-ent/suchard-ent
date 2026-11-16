@@ -30,7 +30,8 @@ for(const required of [
   'images/lovestruck-2015-hero-desktop.webp',
   'images/lovestruck-2015-hero-mobile.webp',
   'images/lovestruck-2015-og.jpg',
-  'favicon.svg', 'sitemap-index.xml'
+  'favicon.ico', 'favicon-16x16.png', 'favicon-32x32.png', 'favicon-48x48.png',
+  'apple-touch-icon.png', 'icon-192.png', 'icon-512.png', 'site.webmanifest', 'sitemap-index.xml'
 ]) assert.ok(files.includes(required), 'Missing Pages artifact: ' + required);
 
 for(const path of htmlFiles) {
@@ -68,6 +69,18 @@ for(const path of htmlFiles) {
   }
 }
 
+const manifest=JSON.parse(read('site.webmanifest'));
+assert.equal(manifest.short_name,'SUCHARD');
+assert.equal(manifest.start_url,'./ko/');
+for(const icon of manifest.icons){
+  const file=icon.src.replace(/^\.\//,'');
+  assert.ok(files.includes(file),'Missing webmanifest icon '+icon.src);
+}
+for(const lang of ['ko','en','ja']){
+  const html=read(lang+'/index.html');
+  for(const iconFile of ['favicon.ico','favicon-32x32.png','apple-touch-icon.png','site.webmanifest'])
+    assert.ok(html.includes(base+iconFile),'Missing linked icon '+lang+' '+iconFile);
+}
 const sitemap = read('sitemap-0.xml');
 assert.ok(sitemap.includes('<loc>' + expectedOrigin + 'ko/</loc>'), 'Korean homepage missing from sitemap');
 assert.ok(sitemap.includes('<loc>' + expectedOrigin + 'en/</loc>'), 'English homepage missing from sitemap');

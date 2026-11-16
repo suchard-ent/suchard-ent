@@ -57,5 +57,7 @@ SUCHARD（パク・ヒジョン）は、韓国のバンド**Mongoose**でベー�
 ---
 
 <div align="center">
+  **Contact · お問い合わせ · 작업 문의:** [suchard337@gmail.com](mailto:suchard337@gmail.com)
+
   <sub>SUCHARD · MUSICIAN / COMPOSER / PRODUCER</sub>
 </div>

@@ -287,3 +287,33 @@ html[lang="ja"] .section-heading {
   html[lang="ja"] .primary-nav {gap: 14px}
   html[lang="ja"] .primary-nav a {font-size: 10px}
 }
+
+
+html[lang="ko"] .contact-panel .section-heading {
+  white-space: nowrap;
+  word-break: keep-all;
+}
+.contact-email {
+  display: inline-flex;
+  align-items: baseline;
+  gap: .55em;
+  max-width: 100%;
+  margin-top: 27px;
+  border-bottom: 1px solid #92908d;
+  padding-bottom: 6px;
+  color: #d7d1cb;
+  font-family: var(--font-display);
+  font-size: clamp(17px, 1.65vw, 24px);
+  font-weight: 400;
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+  transition: color .2s, border-color .2s;
+}
+.contact-email:hover, .contact-email:focus-visible {
+  color: #fff;
+  border-color: #fff;
+}
+.contact-email span {font-size: .8em}
+@media (max-width: 540px) {
+  .contact-email {font-size: 17px}
+}

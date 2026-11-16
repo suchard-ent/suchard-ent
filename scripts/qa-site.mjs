@@ -25,10 +25,21 @@ try{
       innerWidth:innerWidth,
       h1Overflow:rect?rect.left<-2||rect.right>innerWidth+2:false,
       sameOriginLinks:links.filter(x=>x.startsWith('/')),
-      hiddenFilters:[...document.querySelectorAll('.credit-entry[hidden]')].length
+      hiddenFilters:[...document.querySelectorAll('.credit-entry[hidden]')].length,
+      contactEmail:document.querySelector('a.contact-email')?.getAttribute('href'),
+      contactTitleLines:(()=>{
+        const span=document.querySelector('.contact-panel .section-heading span');
+        if(!span)return 0;
+        const range=document.createRange();
+        range.selectNodeContents(span);
+        return range.getClientRects().length;
+      })()
     };
    });
-   const bad=response?.status()!==200||check.width>check.innerWidth+1||check.h1Overflow||check.h1Count!==1||check.hreflang.length!==4||!check.canonical||check.jsonld.length<1;
+   const homePage=/^\/(ko|en|ja)\/$/.test(path);
+   const bad=response?.status()!==200||check.width>check.innerWidth+1||check.h1Overflow||check.h1Count!==1||check.hreflang.length!==4||!check.canonical||check.jsonld.length<1
+     ||(homePage&&check.contactEmail!=='mailto:suchard337@gmail.com')
+     ||(path==='/ko/'&&check.contactTitleLines!==1);
    if(bad)failures.push({viewport:width,path,status:response?.status(),...check});
    console.log(bad?'FAIL':'PASS',width,path,response?.status(),'width '+check.width+'/'+width);
    if(path==='/ko/credits/'&&width===390){
