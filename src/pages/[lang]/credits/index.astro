@@ -1,0 +1,49 @@
+---
+import PortfolioLayout from '../../../layouts/PortfolioLayout.astro';
+import PortfolioHeader from '../../../components/PortfolioHeader.astro';
+import {works} from '../../../data/credits';
+import type {Lang} from '../../../data/credits';
+import {getText} from '../../../data/portfolio-copy';
+import {getCreditsMeta} from '../../../data/seo-copy';
+export function getStaticPaths(){return [{params:{lang:'ko'}},{params:{lang:'en'}}];}
+const lang=Astro.params.lang as Lang;
+const t=getText(lang);
+const meta=getCreditsMeta(lang);
+const base=import.meta.env.BASE_URL;
+const records=[...works].sort((a,b)=>Number(b.year)-Number(a.year));
+---
+<PortfolioLayout lang={lang} title={meta.title} description={meta.description} path="credits">
+<div class="credits-hero">
+  <div class="inner-header"><PortfolioHeader lang={lang} path="credits"/></div>
+  <main class="subpage">
+    <p class="section-eyebrow">SELECTED RECORDINGS & CREDITS</p>
+    <h1>{t.allWorks}</h1>
+    <p class="intro">{t.musicianDetails}</p>
+    <div class="credits-controls" aria-label={t.categoryLabel}>
+      <button type="button" data-filter="all" aria-pressed="true">{lang==='ko'?'전체':'All'}</button>
+      {(['band','solo','production','session'] as const).map(cat=><button type="button" data-filter={cat} aria-pressed="false">{t.category[cat]}</button>)}
+    </div>
+    <div class="credit-entries" id="credit-entries">
+    {records.map(w=><article class="credit-entry" data-category={w.category}>
+      <span class="credit-year">{w.year}</span>
+      <div><h2><a href={base+lang+'/works/'+w.id+'/'}>{w.title}</a></h2><p class="record-artist">{w.artist} / {t.category[w.category]}</p></div>
+      <p class="credit-role">{w.role[lang]}</p>
+      <a class="go" href={base+lang+'/works/'+w.id+'/'} aria-label={w.title+' '+t.more}>↗</a>
+    </article>)}
+    </div>
+  </main>
+  <footer class="portfolio-footer"><span>© 2026 SUCHARD</span><span>MONGOOSE · SOLO · PRODUCTION</span><a href={base+lang+'/'}>{t.back} ↑</a></footer>
+</div>
+<script>
+document.querySelectorAll<HTMLButtonElement>('[data-filter]').forEach(button=>{
+  button.addEventListener('click',()=>{
+    const selected=button.dataset.filter;
+    document.querySelectorAll<HTMLButtonElement>('[data-filter]').forEach(b=>b.setAttribute('aria-pressed',String(b===button)));
+    document.querySelectorAll<HTMLElement>('[data-category]').forEach(el=>{
+      el.hidden=selected!=='all'&&el.dataset.category!==selected;
+    });
+  });
+});
+</script>
+<style>.credit-entry[hidden]{display:none}</style>
+</PortfolioLayout>

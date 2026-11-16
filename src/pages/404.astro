@@ -1,0 +1,36 @@
+---
+const base=import.meta.env.BASE_URL;
+---
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="robots" content="noindex,follow" />
+  <meta name="theme-color" content="#0b0b0b" />
+  <title>페이지를 찾을 수 없습니다 | SUCHARD</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/wanteddev/wanted-sans@v1.0.3/packages/wanted-sans/fonts/webfonts/variable/split/WantedSansVariable.min.css" />
+  <style>
+    :root{font-family:"Wanted Sans Variable",system-ui,sans-serif;color-scheme:dark}
+    body{background:#0b0b0b;color:#f5f2ee;min-height:100svh;margin:0;display:flex;align-items:center;padding:clamp(24px,6vw,95px)}
+    main{max-width:850px;width:100%}
+    h1{font-size:clamp(58px,10vw,146px);font-weight:400;letter-spacing:-.06em;margin:5px 0}
+    p{color:#a9a5a2;font-size:15px;line-height:1.9}
+    nav{display:flex;gap:28px;flex-wrap:wrap;margin-top:42px}
+    a{color:#e2dedb;font-size:13px;text-decoration:none;border-bottom:1px solid #777;padding-bottom:7px}
+    a:hover{color:#fff;border-color:#fff}
+    .eyebrow{font-size:11px;letter-spacing:.2em}
+  </style>
+</head>
+<body>
+  <main>
+    <p class="eyebrow">SUCHARD / 404</p>
+    <h1>Page not found.</h1>
+    <p>요청하신 페이지를 찾을 수 없습니다.</p>
+    <nav aria-label="홈으로 이동">
+      <a href={base+'ko/'}>처음으로 돌아가기 ↗</a>
+      <a href={base+'en/'} lang="en">Back to home ↗</a>
+    </nav>
+  </main>
+</body>
+</html>

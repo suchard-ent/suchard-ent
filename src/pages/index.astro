@@ -1,0 +1,15 @@
+---
+const base=import.meta.env.BASE_URL;
+const next=base+'ko/';
+---
+<!doctype html><html lang="ko">
+<head>
+<meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/>
+<meta name="robots" content="noindex,nofollow" />
+<title>SUCHARD — Musician / Producer</title>
+<meta http-equiv="refresh" content={['0;url=',next].join('')} />
+<link rel="canonical" href={new URL(next,Astro.site||'http://localhost:4321/').toString()}/>
+</head>
+<body style="margin:0;display:grid;min-height:100vh;place-content:center;background:#0b0b0b;color:#f5f2ee;font:20px system-ui,sans-serif">
+<a href={next} style="color:inherit">SUCHARD — 한국어 사이트로 이동 →</a>
+</body></html>

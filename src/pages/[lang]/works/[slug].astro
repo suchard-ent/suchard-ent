@@ -1,0 +1,62 @@
+---
+import PortfolioLayout from '../../../layouts/PortfolioLayout.astro';
+import PortfolioHeader from '../../../components/PortfolioHeader.astro';
+import {works} from '../../../data/credits';
+import type {Lang,Work} from '../../../data/credits';
+import {getText} from '../../../data/portfolio-copy';
+import {getSourceLabel} from '../../../data/ui-copy';
+import {getWorkMeta} from '../../../data/seo-copy';
+export function getStaticPaths(){
+  return ['ko','en'].flatMap(lang=>works.map(w=>({params:{lang,slug:w.id},props:{work:w}})));
+}
+interface Props {work:Work;}
+const {work}=Astro.props;
+const lang=Astro.params.lang as Lang;
+const t=getText(lang);
+const meta=getWorkMeta(lang,work);
+const base=import.meta.env.BASE_URL;
+const jsonld={
+ '@context':'https://schema.org',
+ '@type':(['early','dancing','mongoose','cosmic','girlfriend'].includes(work.id)?'MusicAlbum':'MusicRecording'),
+ name:work.title,
+ byArtist:{'@type':work.category==='band'?'MusicGroup':'Person',name:work.artist},
+ datePublished:work.year,
+ image:new URL(base+'images/'+work.image,Astro.site||'http://localhost:4321/').toString(),
+ url:new URL(base+lang+'/works/'+work.id+'/',Astro.site||'http://localhost:4321/').toString(),
+ sameAs:[work.link,work.source]
+};
+---
+<PortfolioLayout lang={lang} title={meta.title} description={meta.description} image={work.id==='lovestruck'?'lovestruck-2015-og.jpg':work.image} path={'works/'+work.id} type="work">
+  <script slot="jsonld" type="application/ld+json" set:html={JSON.stringify(jsonld)} />
+  <div class="work-detail">
+    <div class="inner-header"><PortfolioHeader lang={lang} path={'works/'+work.id}/></div>
+    <main class="subpage">
+      <a class="detail-back" href={base+lang+'/credits/'}>← {t.back}</a>
+      {work.id==='lovestruck' && <figure class="work-photo-feature">
+        <img src={base+'images/lovestruck-2015-detail.webp'} alt={lang==='ko'?'2015년 싱글 Lovestruck 발매 당시 촬영된 강변의 슈샤드':'Suchard by the riverside in the 2015 Lovestruck promotional photo'} fetchpriority="high" />
+        <figcaption>
+          <span>LOVESTRUCK / SUCHARD — 2015</span>
+          <a href="https://www.etoday.co.kr/news/view/1224758" target="_blank" rel="noopener noreferrer">{lang==='ko'?'사진 제공: 블렌드 컴퍼니 / 이투데이 기사 ↗':'Photo provided by Blend Company / eToday ↗'}</a>
+        </figcaption>
+      </figure>}
+      <div class="work-grid">
+        <img src={base+'images/'+work.image} alt={work.title+' album artwork'} width="900" height="900"/>
+        <div>
+          <p class="section-eyebrow">{t.pageLabel} / {t.category[work.category]}</p>
+          <p class="detail-year">{work.year} / {work.artist}</p>
+          <h1>{work.title}</h1>
+          <p class="detail-artist">{work.artist}</p>
+          <p class="detail-roles">{work.role[lang]}</p>
+          {work.additionalCredits && <div class="detail-credits">
+            {work.additionalCredits.map(credit=><p>{credit[lang]}</p>)}
+          </div>}
+          <div class="detail-actions">
+            <a href={work.link} target="_blank" rel="noopener noreferrer">{t.listen} ↗</a>
+            {work.source!==work.link && <a href={work.source} target="_blank" rel="noopener noreferrer">{getSourceLabel(lang,work.sourceKind)} ↗</a>}
+          </div>
+        </div>
+      </div>
+    </main>
+    <footer class="portfolio-footer"><span>© 2026 SUCHARD</span><span>MONGOOSE · SOLO · PRODUCTION</span><a href={base+lang+'/credits/'}>{t.back} ↑</a></footer>
+  </div>
+</PortfolioLayout>

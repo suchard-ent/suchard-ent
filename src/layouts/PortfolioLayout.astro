@@ -1,0 +1,69 @@
+---
+import '../styles/site.css';
+import type { Lang } from '../data/credits';
+interface Props {
+  lang: Lang;
+  title: string;
+  description: string;
+  path?: string;
+  image?: string;
+  type?: 'profile' | 'work';
+}
+const {lang,title,description,path='',image='lovestruck-2015-og.jpg',type='profile'}=Astro.props;
+const base=import.meta.env.BASE_URL;
+const root=Astro.site?.toString()||'http://127.0.0.1:4321/';
+const localPath=(l:Lang)=>base+l+'/'+(path?path.replace(/^\/|\/$/g,'')+'/':'');
+const absolute=(l:Lang)=>new URL(localPath(l),root).toString();
+const canonical=absolute(lang);
+const production=import.meta.env.PUBLIC_PRODUCTION==='true';
+const profile={
+  '@context':'https://schema.org',
+  '@type':'ProfilePage',
+  '@id':canonical+'#profile',
+  url:canonical,
+  inLanguage:lang,
+  mainEntity:{
+    '@type':'Person',
+    '@id':new URL(base+'#suchard',root).toString(),
+    name:'Suchard',
+    alternateName:['슈샤드','박희정'],
+    jobTitle:['Musician','Composer','Music producer'],
+    description,
+    knowsAbout:['Bass guitar','Guitar','Music arrangement','Music production'],
+    sameAs:['https://blendcompany.bandcamp.com/album/prescription','https://blendcompany.bandcamp.com/album/lovestruck'],
+    memberOf:{'@type':'MusicGroup',name:'Mongoose',sameAs:'https://open.spotify.com/artist/33NSPHPUhk5VQNkkMUv6fF'}
+  }
+};
+---
+<!doctype html>
+<html lang={lang}>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin="anonymous" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/wanteddev/wanted-sans@v1.0.3/packages/wanted-sans/fonts/webfonts/variable/split/WantedSansVariable.min.css" />
+  <meta name="color-scheme" content="dark" />
+  <meta name="theme-color" content="#0b0b0b" />
+  <title>{title}</title>
+  <meta name="description" content={description} />
+  <meta name="robots" content={production?'index,follow,max-image-preview:large':'noindex,nofollow'} />
+  <link rel="canonical" href={canonical} />
+  <link rel="alternate" hreflang="ko" href={absolute('ko')} />
+  <link rel="alternate" hreflang="en" href={absolute('en')} />
+  <link rel="alternate" hreflang="x-default" href={absolute('en')} />
+  <meta property="og:type" content={type==='profile'?'profile':'article'} />
+  <meta property="og:site_name" content="Suchard" />
+  <meta property="og:locale" content={lang==='ko'?'ko_KR':'en_US'} />
+  <meta property="og:title" content={title} />
+  <meta property="og:description" content={description} />
+  <meta property="og:url" content={canonical} />
+  <meta property="og:image" content={new URL(base+'images/'+image,root).toString()} />
+  <meta property="og:image:alt" content={image==='lovestruck-2015-og.jpg'?(lang==='ko'?'슈샤드 — 2015년 Lovestruck 프로모션 사진':'Suchard — 2015 Lovestruck promotional photograph'):title} />
+  <meta name="twitter:image" content={new URL(base+'images/'+image,root).toString()} />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="icon" href={base+'favicon.svg'} type="image/svg+xml" />
+  <script type="application/ld+json" set:html={JSON.stringify(profile)} />
+  <slot name="jsonld" />
+</head>
+<body><slot /></body>
+</html>

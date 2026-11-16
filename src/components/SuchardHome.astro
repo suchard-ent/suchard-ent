@@ -1,0 +1,120 @@
+---
+import {works} from '../data/credits';
+import type {Lang} from '../data/credits';
+import {getText} from '../data/portfolio-copy';
+import PortfolioHeader from './PortfolioHeader.astro';
+interface Props {lang:Lang;}
+const {lang}=Astro.props;
+const t=getText(lang);
+const base=import.meta.env.BASE_URL;
+const image=(file:string)=>base+'images/'+file;
+const root=base+lang+'/';
+const records=[...works].sort((a,b)=>Number(b.year)-Number(a.year));
+---
+<main class="suchard-site">
+  <section class="portfolio-hero" id="top" aria-label="Suchard">
+    <div class="hero-photograph"><picture><source media="(max-width: 540px)" srcset={image('lovestruck-2015-hero-mobile.webp')} /><img src={image('lovestruck-2015-hero-desktop.webp')} alt={lang==='ko'?'2015년 Lovestruck 발표 당시, 강변에서 기타를 들고 서 있는 슈샤드':'Suchard holding an electric guitar beside a river in a 2015 Lovestruck promotional photo'} fetchpriority="high" /></picture></div>
+    <div class="hero-shade"></div>
+    <PortfolioHeader lang={lang}/>
+    <div class="hero-copy">
+      <p class="micro-label">{t.role} <span aria-hidden="true">/</span> MONGOOSE</p>
+      <h1>Suchard</h1>
+      <p class="hero-caption">{t.heroLine}</p>
+    </div>
+    <a href="#music" class="scroll-indicator">{t.scroll}<span aria-hidden="true">↓</span></a>
+    <span class="edge-label" aria-hidden="true">MUSICIAN / PRODUCER</span>
+    <a class="hero-photo-credit" href="https://www.etoday.co.kr/news/view/1224758" target="_blank" rel="noopener noreferrer" aria-label={lang==='ko'?'Lovestruck 2015 사진 출처':'Lovestruck 2015 photo source'}>LOVESTRUCK / 2015 <span aria-hidden="true">↗</span></a>
+  </section>
+
+  <section id="music" class="music-section page-section">
+    <div class="section-container">
+      <p class="section-eyebrow">{t.eyebrow.music}</p>
+      <div class="section-heading-row">
+        <h2 class="section-heading">{t.discography}</h2>
+        <a class="simple-text-link all-credits" href={root+'credits/'}>{t.allWorks}<span aria-hidden="true">↗</span></a>
+      </div>
+      <div class="release-grid">
+        {records.map(work=><article class="release-card">
+          <a href={root+'works/'+work.id+'/'} class="release-art-link" aria-label={work.title+' — '+t.more}>
+            <img src={image(work.image)} alt={work.title+' album art'} loading="lazy" width="400" height="400" />
+          </a>
+          <h3><a href={root+'works/'+work.id+'/'}>{work.title}</a></h3>
+          <p class="release-meta">{work.artist} <span aria-hidden="true">·</span> {work.year}</p>
+          <p class="release-roles">{t.category[work.category]}</p>
+        </article>)}
+      </div>
+      <div class="streaming-links" aria-label="Recordings">
+        <a href="https://open.spotify.com/artist/33NSPHPUhk5VQNkkMUv6fF" target="_blank" rel="noopener noreferrer">MONGOOSE / SPOTIFY <span aria-hidden="true">↗</span></a>
+        <a href="https://www.youtube.com/watch?v=-oU884kEfpg" target="_blank" rel="noopener noreferrer">SUCHARD / YOUTUBE <span aria-hidden="true">↗</span></a>
+        <a href="https://blendcompany.bandcamp.com/album/prescription" target="_blank" rel="noopener noreferrer">SUCHARD / BANDCAMP <span aria-hidden="true">↗</span></a>
+      </div>
+    </div>
+  </section>
+
+  <section id="about" class="about-section page-section">
+    <div class="section-container about-layout">
+      <div class="about-visuals">
+        <figure class="about-portrait">
+          <img src={image('mongoose-2011-group-bw.webp')} alt={lang==='ko'?'몽구스 멤버 세 명이 함께 찍은 활동 당시 공식 사진':'Archival group photograph of three Mongoose members'} loading="lazy" />
+          <figcaption>{lang==='ko'?'MONGOOSE / 2011 · 밴드 활동 당시':'MONGOOSE / 2011 · Band years'}</figcaption>
+        </figure>
+        <a class="about-solo-strip" href={root+'works/lovestruck/'} aria-label={lang==='ko'?'2015년 솔로 싱글 Lovestruck 상세':'2015 solo single Lovestruck details'}>
+          <img src={image('lovestruck-2015-about.webp')} alt={lang==='ko'?'2015년 Lovestruck 프로모션 사진':'2015 Lovestruck promotional photograph'} loading="lazy" />
+          <span>2015 / LOVESTRUCK <span aria-hidden="true">↗</span></span>
+        </a>
+      </div>
+      <div class="about-text">
+        <p class="section-eyebrow">{t.eyebrow.about}</p>
+        <h2 class="section-heading multiline">{t.aboutTitle.split('\n').map((line,i)=><span>{line}{i<1&&<span class="break-mobile"> </span>}</span>)}</h2>
+        {t.aboutParas.map(para=><p class="bio-paragraph">{para}</p>)}
+        <a class="simple-text-link biography-source" href={root+'credits/'}>{t.nav.credits} <span aria-hidden="true">↗</span></a>
+      </div>
+    </div>
+  </section>
+
+  <section id="press" class="press-section page-section">
+    <div class="section-container">
+      <p class="section-eyebrow">{t.eyebrow.press}</p>
+      <h2 class="section-heading">{t.pressTitle}</h2>
+      <div class="press-grid">
+        {t.pressCards.map(item=><article class="press-card" data-visual={'visual' in item && item.visual === 'photo' ? 'photo' : 'cover'}>
+          <a href={item.href} target="_blank" rel="noopener noreferrer" aria-label={item.title}>
+            <div class="press-image"><img src={image(item.image)} alt="" loading="lazy" /></div>
+            <div class="press-card-body">
+              <p class="card-eyebrow">{item.eyebrow}</p>
+              <h3>{item.title}</h3>
+              <p class="press-summary">{item.subtitle}</p>
+              <span class="read-more">{item.link}<span aria-hidden="true">→</span></span>
+            </div>
+          </a>
+        </article>)}
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" class="contact-section page-section">
+    <div class="section-container contact-grid">
+      <div class="follow-panel">
+        <p class="section-eyebrow">{t.eyebrow.follow}</p>
+        <h2 class="section-heading">{t.followTitle}</h2>
+        <div class="follow-links">
+          <a href="https://open.spotify.com/artist/33NSPHPUhk5VQNkkMUv6fF" target="_blank" rel="noopener noreferrer"><span>MONGOOSE / SPOTIFY</span><span aria-hidden="true">↗</span></a>
+          <a href="https://blendcompany.bandcamp.com/album/prescription" target="_blank" rel="noopener noreferrer"><span>SUCHARD / BANDCAMP</span><span aria-hidden="true">↗</span></a>
+          <a href="https://www.youtube.com/watch?v=-oU884kEfpg" target="_blank" rel="noopener noreferrer"><span>SUCHARD / YOUTUBE</span><span aria-hidden="true">↗</span></a>
+          <a href="https://soundcloud.com/band-mongoose" target="_blank" rel="noopener noreferrer"><span>MONGOOSE / SOUNDCLOUD</span><span aria-hidden="true">↗</span></a>
+        </div>
+      </div>
+      <div class="contact-panel">
+        <p class="section-eyebrow">{t.eyebrow.contact}</p>
+        <h2 class="section-heading multiline">{t.contactTitle.split('\n').map(line=><span>{line}</span>)}</h2>
+        <p class="contact-copy">{t.contactText}</p>
+        <p class="contact-pending">{t.contactPending}</p>
+      </div>
+    </div>
+  </section>
+  <footer class="portfolio-footer">
+    <span>© 2026 SUCHARD</span>
+    <span>MONGOOSE · SOLO · PRODUCTION</span>
+    <a href="#top">BACK TO TOP ↑</a>
+  </footer>
+</main>
