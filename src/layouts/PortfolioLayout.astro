@@ -7,11 +7,13 @@ interface Props {
   lang: Lang;
   title: string;
   description: string;
+  ogTitle?: string;
+  ogDescription?: string;
   path?: string;
   image?: string;
   type?: 'profile' | 'work';
 }
-const {lang,title,description,path='',image='lovestruck-2015-og.jpg',type='profile'}=Astro.props;
+const {lang,title,description,ogTitle=title,ogDescription=description,path='',image='suchard-og-2026.jpg',type='profile'}=Astro.props;
 const base=import.meta.env.BASE_URL;
 const root=Astro.site?.toString()||'http://127.0.0.1:4321/';
 const localPath=(l:Lang)=>base+l+'/'+(path?path.replace(/^\/|\/$/g,'')+'/':'');
@@ -61,12 +63,19 @@ const profile={
   <meta property="og:type" content={type==='profile'?'profile':'article'} />
   <meta property="og:site_name" content="Suchard" />
   <meta property="og:locale" content={lang==='ko'?'ko_KR':lang==='ja'?'ja_JP':'en_US'} />
-  <meta property="og:title" content={title} />
-  <meta property="og:description" content={description} />
+  <meta property="og:title" content={ogTitle} />
+  <meta property="og:description" content={ogDescription} />
   <meta property="og:url" content={canonical} />
   <meta property="og:image" content={new URL(base+'images/'+image,root).toString()} />
-  <meta property="og:image:alt" content={image==='lovestruck-2015-og.jpg'?(lang==='ko'?'슈샤드 — 2015년 Lovestruck 프로모션 사진':lang==='ja'?'SUCHARD — 2015年のLovestruckプロモーション写真':'Suchard — 2015 Lovestruck promotional photograph'):title} />
+  {image==='suchard-og-2026.jpg' && <>
+    <meta property="og:image:type" content="image/jpeg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+  </>}
+  <meta property="og:image:alt" content={image==='suchard-og-2026.jpg'?(lang==='ko'?'슈샤드 — 2015년 Lovestruck 프로모션 사진':lang==='ja'?'SUCHARD — 2015年のLovestruckプロモーション写真':'Suchard — 2015 Lovestruck promotional photograph'):title} />
   <meta name="twitter:image" content={new URL(base+'images/'+image,root).toString()} />
+  <meta name="twitter:title" content={ogTitle} />
+  <meta name="twitter:description" content={ogDescription} />
   <meta name="twitter:card" content="summary_large_image" />
   <link rel="icon" href={base+'favicon.ico'} sizes="any" />
   <link rel="icon" href={base+'favicon-32x32.png'} sizes="32x32" type="image/png" />

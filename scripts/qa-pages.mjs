@@ -29,7 +29,7 @@ for(const required of [
   'ko/works/lovestruck/index.html', 'en/works/lovestruck/index.html', 'ja/works/lovestruck/index.html',
   'images/lovestruck-2015-hero-desktop.webp',
   'images/lovestruck-2015-hero-mobile.webp',
-  'images/lovestruck-2015-og.jpg',
+  'images/suchard-og-2026.jpg',
   'favicon.ico', 'favicon-16x16.png', 'favicon-32x32.png', 'favicon-48x48.png',
   'apple-touch-icon.png', 'icon-192.png', 'icon-512.png', 'site.webmanifest', 'sitemap-index.xml'
 ]) assert.ok(files.includes(required), 'Missing Pages artifact: ' + required);

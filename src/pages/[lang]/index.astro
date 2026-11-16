@@ -8,6 +8,6 @@ export function getStaticPaths(){return locales.map(lang=>({params:{lang}}));}
 const lang=Astro.params.lang as Lang;
 const meta=getHomeMeta(lang);
 ---
-<PortfolioLayout lang={lang} title={meta.title} description={meta.description}>
+<PortfolioLayout lang={lang} title={meta.title} description={meta.description} ogTitle={meta.ogTitle} ogDescription={meta.ogDescription}>
   <SuchardHome lang={lang}/>
 </PortfolioLayout>

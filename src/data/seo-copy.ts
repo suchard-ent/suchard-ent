@@ -1,6 +1,7 @@
 import type {Lang, Work} from './credits';
+import {getBiography} from './biography';
 
-export const getHomeMeta = (lang: Lang) => lang === 'ko'
+const getHomeSeoMeta = (lang: Lang) => lang === 'ko'
   ? {
       title: '슈샤드 | 몽구스 · 솔로 · 음악 프로듀싱',
       description: '몽구스에서 베이스와 기타를 연주한 슈샤드의 솔로 싱글 〈Lovestruck〉·〈처방전〉과 작곡·편곡·프로듀싱 참여작.'
@@ -14,6 +15,16 @@ export const getHomeMeta = (lang: Lang) => lang === 'ko'
       title:'SUCHARD | Mongoose・ソロ作品・音楽制作',
       description:'韓国のバンドMongooseでベースとギターを担当したSUCHARD。ソロ・シングル『Lovestruck』『처방전』と作曲・編曲・プロデュース参加作品を紹介。'
     };
+
+export const getHomeMeta = (lang: Lang) => ({
+  ...getHomeSeoMeta(lang),
+  ogTitle: {
+    ko: 'SUCHARD | 슈샤드',
+    en: 'SUCHARD | Musician & Producer',
+    ja: 'SUCHARD | 音楽家・プロデューサー'
+  }[lang],
+  ogDescription: getBiography(lang).heroLine
+});
 
 export const getCreditsMeta = (lang: Lang) => lang === 'ko'
   ? {

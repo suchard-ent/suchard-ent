@@ -26,7 +26,7 @@ const jsonld={
  sameAs:[work.link,work.source]
 };
 ---
-<PortfolioLayout lang={lang} title={meta.title} description={meta.description} image={work.id==='lovestruck'?'lovestruck-2015-og.jpg':work.image} path={'works/'+work.id} type="work">
+<PortfolioLayout lang={lang} title={meta.title} description={meta.description} image={work.id==='lovestruck'?'suchard-og-2026.jpg':work.image} path={'works/'+work.id} type="work">
   <script slot="jsonld" type="application/ld+json" set:html={JSON.stringify(jsonld)} />
   <div class="work-detail">
     <div class="inner-header"><PortfolioHeader lang={lang} path={'works/'+work.id}/></div>

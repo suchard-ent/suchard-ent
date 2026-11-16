@@ -46,7 +46,7 @@ try {
           check.docWidth<=check.screenWidth+1 &&
           check.missing.length===0 &&
           check.robots?.includes('noindex') &&
-          check.og?.includes('lovestruck-2015-og.jpg') &&
+          check.og?.includes('suchard-og-2026.jpg') &&
           (home ?
             check.heroImage?.includes('lovestruck-2015-hero-desktop.webp') &&
             check.mobileSource?.includes('lovestruck-2015-hero-mobile.webp') &&

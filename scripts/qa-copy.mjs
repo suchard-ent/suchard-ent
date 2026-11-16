@@ -61,8 +61,20 @@ const newsLinks=[
   'https://m.entertain.naver.com/home/article/312/0000008050',
   'https://m.entertain.naver.com/home/article/468/0000068775'
 ];
+const homeMetaExpectations={
+  ko:{ogTitle:'SUCHARD | 슈샤드',ogDescription:'연주와 작곡, 프로듀싱을 오가며 음악을 만듭니다.'},
+  en:{ogTitle:'SUCHARD | Musician &amp; Producer',ogDescription:'Playing, composing, and producing music.'},
+  ja:{ogTitle:'SUCHARD | 音楽家・プロデューサー',ogDescription:'演奏、作曲、プロデュースを通して音楽をつくっています。'}
+};
 for(const lang of ['ko','en','ja']){
  const home=read('dist/'+lang+'/index.html');
+ const {ogTitle,ogDescription}=homeMetaExpectations[lang];
+ assert.ok(home.includes('property="og:title" content="'+ogTitle+'"'),lang+' wrong OG title');
+ assert.ok(home.includes('property="og:description" content="'+ogDescription+'"'),lang+' wrong OG description');
+ assert.ok(home.includes('name="twitter:title" content="'+ogTitle+'"'),lang+' wrong Twitter title');
+ assert.ok(home.includes('name="twitter:description" content="'+ogDescription+'"'),lang+' wrong Twitter description');
+ assert.ok(home.includes('images/suchard-og-2026.jpg'),lang+' wrong share image');
+ assert.ok(home.includes(ogDescription),lang+' mismatch with Hero');
  for(const url of newsLinks)assert.ok(home.includes(url),lang+' missing Naver article '+url);
  assert.ok(home.includes('mailto:suchard337@gmail.com'),lang+' missing contact mailto');
  for(const obsolete of ['연락처 준비 중','Enquiry address coming soon','お問い合わせ先は準備中です'])
