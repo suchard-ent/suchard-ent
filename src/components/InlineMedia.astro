@@ -1,0 +1,30 @@
+---
+import type {Lang,Work} from '../data/credits';
+import {getWorkMedia} from '../data/media';
+import {getUiCopy} from '../data/ui-copy';
+import MediaButton from './MediaButton.astro';
+
+interface Props {lang:Lang;work:Work}
+const {lang,work}=Astro.props;
+const t=getUiCopy(lang).media;
+const media=getWorkMedia(work);
+const isVideo=media.provider==='youtube';
+const base=import.meta.env.BASE_URL;
+---
+<section id="work-media" class="detail-media" data-inline-media aria-label={t.listenHere}>
+  <div class="detail-media-heading">
+    <div>
+      <p class="section-eyebrow">{isVideo?'WATCH':'LISTEN'} / {media.provider.toUpperCase()}</p>
+      <h2>{isVideo?t.watch:t.play}</h2>
+    </div>
+    <p>{t.listenHint}</p>
+  </div>
+  <div class={'detail-media-frame detail-media-frame--'+media.provider} data-inline-frame>
+    <div class="detail-media-poster">
+      <img src={base+'images/'+work.image} alt="" loading="lazy" width="400" height="400" />
+      <div class="detail-media-poster-shade"></div>
+      <MediaButton lang={lang} media={media} variant="inline" title={work.title} artist={work.artist} label={t.playHere}/>
+    </div>
+  </div>
+  <a class="detail-media-external" href={media.externalUrl} target="_blank" rel="noopener noreferrer">{t.openExternal} / {media.provider.toUpperCase()} ↗</a>
+</section>

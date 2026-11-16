@@ -1,0 +1,110 @@
+---
+import type {Lang} from '../data/credits';
+import {getUiCopy} from '../data/ui-copy';
+interface Props {lang:Lang}
+const {lang}=Astro.props;
+const t=getUiCopy(lang).media;
+---
+<dialog class="media-dialog" data-media-dialog aria-labelledby="media-dialog-title">
+  <div class="media-dialog-body">
+    <div class="media-dialog-head">
+      <div class="media-dialog-details">
+        <p class="section-eyebrow" data-media-provider-label>{t.player}</p>
+        <h2 id="media-dialog-title" data-media-title>{t.player}</h2>
+        <p class="media-dialog-artist" data-media-artist></p>
+      </div>
+      <button type="button" class="media-dialog-close" data-media-close aria-label={t.close} title={t.close}>
+        <svg viewBox="0 0 24 24" width="21" height="21" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+          <path d="M5 5 19 19M19 5 5 19" />
+        </svg>
+      </button>
+    </div>
+    <div class="media-dialog-frame" data-media-dialog-frame></div>
+    <div class="media-dialog-bottom">
+      <span class="media-dialog-note" data-media-footnote>{t.fallback}</span>
+      <a data-media-external-link href="#" target="_blank" rel="noopener noreferrer">{t.openExternal} ↗</a>
+    </div>
+  </div>
+</dialog>
+
+<script>
+  const dialog=document.querySelector<HTMLDialogElement>('[data-media-dialog]');
+  const permittedHosts=new Set(['www.youtube-nocookie.com','open.spotify.com','w.soundcloud.com']);
+  const iframeAllow='autoplay; encrypted-media; fullscreen; picture-in-picture; clipboard-write';
+
+  const getPermittedEmbed=(value:string,provider:string)=>{
+    try {
+      const url=new URL(value);
+      if(url.protocol!=='https:'||!permittedHosts.has(url.hostname))return null;
+      if(provider==='youtube'&&url.hostname==='www.youtube-nocookie.com'&&/^\/embed\/[A-Za-z0-9_-]{11}$/.test(url.pathname))return url;
+      if(provider==='spotify'&&url.hostname==='open.spotify.com'&&/^\/embed\/(?:album|artist)\/[a-zA-Z0-9]{22}$/.test(url.pathname))return url;
+      if(provider==='soundcloud'&&url.hostname==='w.soundcloud.com'&&url.pathname==='/player/')return url;
+    } catch {}
+    return null;
+  };
+
+  const makeFrame=(button:HTMLButtonElement)=>{
+    const provider=button.dataset.mediaProvider||'';
+    const url=getPermittedEmbed(button.dataset.mediaEmbed||'',provider);
+    if(!url)return null;
+    if(provider==='youtube')url.searchParams.set('autoplay','1');
+    const frame=document.createElement('iframe');
+    frame.className='media-frame media-frame--'+provider;
+    frame.src=url.toString();
+    frame.title=(button.dataset.mediaTitle||'Music')+' — '+provider;
+    frame.allow=iframeAllow;
+    frame.allowFullscreen=true;
+    frame.loading='eager';
+    frame.referrerPolicy='strict-origin-when-cross-origin';
+    frame.setAttribute('frameborder','0');
+    return frame;
+  };
+
+  document.addEventListener('click',(event)=>{
+    const target=event.target;
+    if(!(target instanceof Element))return;
+    const button=target.closest<HTMLButtonElement>('[data-media-open],[data-media-inline-open]');
+    if(!button)return;
+
+    if(button.matches('[data-media-inline-open]')){
+      const shell=button.closest<HTMLElement>('[data-inline-media]');
+      const frame=makeFrame(button);
+      if(!shell||!frame)return;
+      const host=shell.querySelector<HTMLElement>('[data-inline-frame]');
+      if(!host)return;
+      host.replaceChildren(frame);
+      shell.classList.add('is-playing');
+      return;
+    }
+
+    if(!dialog)return;
+    const frame=makeFrame(button);
+    if(!frame)return;
+    const frameHost=dialog.querySelector<HTMLElement>('[data-media-dialog-frame]');
+    const title=dialog.querySelector<HTMLElement>('[data-media-title]');
+    const artist=dialog.querySelector<HTMLElement>('[data-media-artist]');
+    const provider=dialog.querySelector<HTMLElement>('[data-media-provider-label]');
+    const external=dialog.querySelector<HTMLAnchorElement>('[data-media-external-link]');
+    if(!frameHost||!title||!artist||!provider||!external)return;
+    if(dialog.open)dialog.close();
+    title.textContent=button.dataset.mediaTitle||'';
+    artist.textContent=button.dataset.mediaArtist||'';
+    provider.textContent=(button.dataset.mediaProvider||'').toUpperCase();
+    const externalUrl=button.dataset.mediaExternal||'';
+    try {
+      const parsed=new URL(externalUrl);
+      external.href=parsed.protocol==='https:'?parsed.href:'#';
+    }catch{external.href='#'}
+    frameHost.replaceChildren(frame);
+    dialog.showModal();
+    dialog.querySelector<HTMLButtonElement>('[data-media-close]')?.focus();
+  });
+
+  dialog?.querySelector('[data-media-close]')?.addEventListener('click',()=>dialog.close());
+  dialog?.addEventListener('click',(event)=>{
+    if(event.target===dialog)dialog.close();
+  });
+  dialog?.addEventListener('close',()=>{
+    dialog.querySelector('[data-media-dialog-frame]')?.replaceChildren();
+  });
+</script>

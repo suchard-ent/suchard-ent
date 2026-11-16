@@ -1,0 +1,37 @@
+---
+import type {Lang} from '../data/credits';
+import type {EmbeddedMedia} from '../data/media';
+import {getUiCopy} from '../data/ui-copy';
+
+interface Props {
+  lang: Lang;
+  media: EmbeddedMedia;
+  title: string;
+  artist?: string;
+  variant?: 'card' | 'station' | 'inline' | 'credit';
+  label?: string;
+}
+const {lang,media,title,artist='',variant='card',label}=Astro.props;
+const text=getUiCopy(lang).media;
+const prompt=media.provider==='youtube'?text.watch:text.play;
+const accessible=title+' — '+prompt+' ('+media.provider+')';
+---
+<button
+  type="button"
+  class={'media-launch media-launch--'+variant}
+  data-media-provider={media.provider}
+  data-media-embed={media.embedUrl}
+  data-media-external={media.externalUrl}
+  data-media-title={title}
+  data-media-artist={artist}
+  data-media-open={variant==='inline'?undefined:''}
+  data-media-inline-open={variant==='inline'?'':undefined}
+  aria-label={accessible}
+  aria-haspopup={variant==='inline'?undefined:'dialog'}
+  title={accessible}
+>
+  <svg class="media-play-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true" width="22" height="22">
+    <path d="m9 5 10 7-10 7V5Z" fill="currentColor"/>
+  </svg>
+  {variant!=='card'&&variant!=='credit'&&<span>{label||prompt}</span>}
+</button>

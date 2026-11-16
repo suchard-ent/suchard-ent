@@ -27,7 +27,8 @@ export const uiCopy = {
     returnHome:'처음으로 돌아가기',
     all:'전체',
     backToTop:'맨 위로',
-    albumArt:'앨범 표지'
+    albumArt:'앨범 표지',
+    media:{play:'여기서 듣기',watch:'뮤직비디오 보기',player:'음악 플레이어',close:'플레이어 닫기',openExternal:'원본 플랫폼에서 열기',playHere:'이 페이지에서 재생',soundcloud:'SoundCloud에서 듣기',playing:'재생할 음원',listenHere:'바로 듣기 · 영상 보기',listenHint:'선택한 음반이나 영상을 이 페이지에서 재생할 수 있습니다.',fallback:'일부 음원은 플랫폼 정책에 따라 미리듣기만 제공되거나 로그인이 필요할 수 있습니다.'}
   },
   en: {
     name: 'Suchard',
@@ -53,7 +54,8 @@ export const uiCopy = {
     returnHome:'Back to home',
     all:'All',
     backToTop:'Back to top',
-    albumArt:'Album artwork'
+    albumArt:'Album artwork',
+    media:{play:'Listen here',watch:'Watch music video',player:'Music player',close:'Close player',openExternal:'Open on platform',playHere:'Play on this page',soundcloud:'Listen on SoundCloud',playing:'Selected recording',listenHere:'Listen & Watch',listenHint:'Play music and videos here without leaving the page.',fallback:'Full playback may require a sign-in or opening the original platform.'}
   },
   ja: {
     name: 'SUCHARD',
@@ -79,7 +81,8 @@ export const uiCopy = {
     returnHome:'トップに戻る',
     all:'すべて',
     backToTop:'ページ上部へ',
-    albumArt:'ジャケット画像'
+    albumArt:'ジャケット画像',
+    media:{play:'ここで聴く',watch:'MVを見る',player:'音楽プレーヤー',close:'プレーヤーを閉じる',openExternal:'元のサイトで開く',playHere:'このページで再生',soundcloud:'SoundCloudで聴く',playing:'再生する作品',listenHere:'音楽・映像を再生',listenHint:'ページを移動せずに音楽や映像を再生できます。',fallback:'一部の音源は試聴のみ、またはログインが必要な場合があります。'}
   }
 } as const;
 

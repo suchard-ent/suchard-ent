@@ -10,7 +10,7 @@
     "typecheck": "astro check",
     "check:content": "node scripts/qa-copy.mjs",
     "check:pages": "node scripts/qa-pages.mjs",
-    "test:browser": "node scripts/qa-site.mjs && node scripts/verify-lovestruck.mjs"
+    "test:browser": "node scripts/qa-site.mjs && node scripts/verify-lovestruck.mjs && node scripts/qa-media.mjs"
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.7.5",

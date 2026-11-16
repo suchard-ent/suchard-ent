@@ -1,6 +1,8 @@
 ---
 import PortfolioLayout from '../../../layouts/PortfolioLayout.astro';
 import PortfolioHeader from '../../../components/PortfolioHeader.astro';
+import MediaPlayer from '../../../components/MediaPlayer.astro';
+import InlineMedia from '../../../components/InlineMedia.astro';
 import {locales,works} from '../../../data/credits';
 import type {Lang,Work} from '../../../data/credits';
 import {getText} from '../../../data/portfolio-copy';
@@ -51,12 +53,15 @@ const jsonld={
             {work.additionalCredits.map(credit=><p>{credit[lang]}</p>)}
           </div>}
           <div class="detail-actions">
-            <a href={work.link} target="_blank" rel="noopener noreferrer">{t.listen} ↗</a>
+            <a href="#work-media">{t.media.playHere} ↓</a>
+            <a href={work.link} target="_blank" rel="noopener noreferrer">{t.media.openExternal} ↗</a>
             {work.source!==work.link && <a href={work.source} target="_blank" rel="noopener noreferrer">{getSourceLabel(lang,work.sourceKind)} ↗</a>}
           </div>
         </div>
       </div>
+      <InlineMedia lang={lang} work={work}/>
     </main>
     <footer class="portfolio-footer"><span>© 2026 SUCHARD</span><span>MONGOOSE · SOLO · PRODUCTION</span><a href={base+lang+'/credits/'}>{t.back} ↑</a></footer>
   </div>
+  <MediaPlayer lang={lang}/>
 </PortfolioLayout>

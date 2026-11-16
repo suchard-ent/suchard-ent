@@ -118,9 +118,9 @@ for (const lang of ['ko','en','ja']) {
     : lang==='ja' ? ['受賞記録を見る']
     : ['View award']);
   expectText('dist/'+lang+'/works/girlfriend/index.html',lang==='ko'
-    ? ['음악 듣기']
-    : lang==='ja' ? ['音楽を聴く']
-    : ['Listen']);
+    ? ['이 페이지에서 재생']
+    : lang==='ja' ? ['このページで再生']
+    : ['Play on this page']);
   rejectText('dist/'+lang+'/works/girlfriend/index.html',['크레딧 원문','Original credits']);
 }
 expectText('dist/404.html',['처음으로 돌아가기','Back to home','WantedSansVariable.min.css']);
@@ -143,4 +143,29 @@ assert.equal(new Set(descs).size,descs.length,'Work descriptions must be unique'
 const actual=read('src/data/credits.ts');
 assert.ok(actual.includes("id: 'starchis'"));
 assert.ok(actual.includes("sourceKind: 'credits'"));
-console.log('COPY_QA_PASS: 3 locales, 11 works each, archive, contact, credits, metadata and 404');
+for (const lang of ['ko','en','ja']) {
+  const home=read('dist/'+lang+'/index.html');
+  const credits=read('dist/'+lang+'/credits/index.html');
+  const count=(text,phrase)=>text.split(phrase).length-1;
+
+  assert.equal(count(home,'class="media-launch media-launch--card"'),11,lang+' must offer 11 quick-play buttons');
+  assert.equal(count(home,'class="media-launch media-launch--station"'),3,lang+' needs YouTube/Spotify/SoundCloud stations');
+  assert.equal(count(credits,'class="media-launch media-launch--credit"'),11,lang+' credits need 11 play buttons');
+  assert.ok(home.includes('w.soundcloud.com/player/'),lang+' missing SoundCloud embed');
+  assert.ok(home.includes('open.spotify.com/embed/artist/'),lang+' missing Spotify artist embed');
+  assert.ok(home.includes('www.youtube-nocookie.com/embed/'),lang+' missing video embed');
+
+  for (const file of [home,credits]) {
+    assert.ok(!file.includes('<iframe'),lang+' player must not preload third-party iframes');
+    assert.ok(file.includes('data-media-dialog'),lang+' missing modal player');
+  }
+
+  for (const slug of pages) {
+    const detail=read('dist/'+lang+'/works/'+slug+'/index.html');
+    assert.ok(detail.includes('id="work-media"'),lang+'/'+slug+' missing embedded player section');
+    assert.ok(detail.includes('data-media-inline-open'),lang+'/'+slug+' missing inline media action');
+    assert.ok(detail.includes('data-media-external'),lang+'/'+slug+' missing external fallback');
+    assert.ok(!detail.includes('<iframe'),lang+'/'+slug+' preloads third-party iframe before consent');
+  }
+}
+console.log('COPY_QA_PASS: 3 locales, 11 works each, archive, contact, metadata, lazy embed media and 404');

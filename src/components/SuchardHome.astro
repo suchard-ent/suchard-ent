@@ -4,6 +4,9 @@ import type {Lang} from '../data/credits';
 import {getText} from '../data/portfolio-copy';
 import {contactEmail} from '../data/ui-copy';
 import PortfolioHeader from './PortfolioHeader.astro';
+import MediaButton from './MediaButton.astro';
+import MediaPlayer from './MediaPlayer.astro';
+import {featuredMedia,getWorkMedia} from '../data/media';
 interface Props {lang:Lang;}
 const {lang}=Astro.props;
 const t=getText(lang);
@@ -36,18 +39,25 @@ const records=[...works].sort((a,b)=>Number(b.year)-Number(a.year));
       </div>
       <div class="release-grid">
         {records.map(work=><article class="release-card">
-          <a href={root+'works/'+work.id+'/'} class="release-art-link" aria-label={work.title+' — '+t.more}>
-            <img src={image(work.image)} alt={work.title+' — '+t.albumArt} loading="lazy" width="400" height="400" />
-          </a>
+          <div class="release-art-frame">
+            <a href={root+'works/'+work.id+'/'} class="release-art-link" aria-label={work.title+' — '+t.more}>
+              <img src={image(work.image)} alt={work.title+' — '+t.albumArt} loading="lazy" width="400" height="400" />
+            </a>
+            <MediaButton lang={lang} media={getWorkMedia(work)} title={work.title} artist={work.artist} />
+          </div>
           <h3><a href={root+'works/'+work.id+'/'}>{work.title}</a></h3>
           <p class="release-meta">{work.artist} <span aria-hidden="true">·</span> {work.year}</p>
           <p class="release-roles">{t.category[work.category]}</p>
         </article>)}
       </div>
-      <div class="streaming-links" aria-label="Recordings">
-        <a href="https://open.spotify.com/artist/33NSPHPUhk5VQNkkMUv6fF" target="_blank" rel="noopener noreferrer">MONGOOSE / SPOTIFY <span aria-hidden="true">↗</span></a>
-        <a href="https://www.youtube.com/watch?v=-oU884kEfpg" target="_blank" rel="noopener noreferrer">SUCHARD / YOUTUBE <span aria-hidden="true">↗</span></a>
-        <a href="https://blendcompany.bandcamp.com/album/prescription" target="_blank" rel="noopener noreferrer">SUCHARD / BANDCAMP <span aria-hidden="true">↗</span></a>
+      <div class="streaming-links" aria-label={t.media.listenHere}>
+        <p class="streaming-context">{t.media.listenHint}</p>
+        <div class="streaming-actions">
+          <MediaButton lang={lang} media={featuredMedia.youtube} title="처방전 / Prescription" artist="Suchard" label="SUCHARD / YOUTUBE" variant="station" />
+          <MediaButton lang={lang} media={featuredMedia.spotify} title="Mongoose" artist="Mongoose" label="MONGOOSE / SPOTIFY" variant="station" />
+          <MediaButton lang={lang} media={featuredMedia.soundcloud} title="Mongoose" artist="Mongoose" label="MONGOOSE / SOUNDCLOUD" variant="station" />
+          <a href="https://blendcompany.bandcamp.com/album/prescription" target="_blank" rel="noopener noreferrer">SUCHARD / BANDCAMP <span aria-hidden="true">↗</span></a>
+        </div>
       </div>
     </div>
   </section>
@@ -119,3 +129,4 @@ const records=[...works].sort((a,b)=>Number(b.year)-Number(a.year));
     <a href="#top">{t.backToTop} ↑</a>
   </footer>
 </main>
+<MediaPlayer lang={lang} />

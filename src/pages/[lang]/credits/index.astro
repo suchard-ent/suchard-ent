@@ -1,6 +1,9 @@
 ---
 import PortfolioLayout from '../../../layouts/PortfolioLayout.astro';
 import PortfolioHeader from '../../../components/PortfolioHeader.astro';
+import MediaButton from '../../../components/MediaButton.astro';
+import MediaPlayer from '../../../components/MediaPlayer.astro';
+import {getWorkMedia} from '../../../data/media';
 import {locales,works} from '../../../data/credits';
 import type {Lang} from '../../../data/credits';
 import {getText} from '../../../data/portfolio-copy';
@@ -28,12 +31,13 @@ const records=[...works].sort((a,b)=>Number(b.year)-Number(a.year));
       <span class="credit-year">{w.year}</span>
       <div><h2><a href={base+lang+'/works/'+w.id+'/'}>{w.title}</a></h2><p class="record-artist">{w.artist} / {t.category[w.category]}</p></div>
       <p class="credit-role">{w.role[lang]}</p>
-      <a class="go" href={base+lang+'/works/'+w.id+'/'} aria-label={w.title+' '+t.more}>↗</a>
+      <div class="credit-actions"><MediaButton lang={lang} media={getWorkMedia(w)} title={w.title} artist={w.artist} variant="credit"/><a class="go" href={base+lang+'/works/'+w.id+'/'} aria-label={w.title+' '+t.more}>↗</a></div>
     </article>)}
     </div>
   </main>
   <footer class="portfolio-footer"><span>© 2026 SUCHARD</span><span>MONGOOSE · SOLO · PRODUCTION</span><a href={base+lang+'/'}>{t.back} ↑</a></footer>
 </div>
+<MediaPlayer lang={lang}/>
 <script>
 document.querySelectorAll<HTMLButtonElement>('[data-filter]').forEach(button=>{
   button.addEventListener('click',()=>{

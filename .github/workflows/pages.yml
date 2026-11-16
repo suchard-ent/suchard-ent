@@ -34,7 +34,7 @@ jobs:
           BASE_PATH: /suchard-ent/
           PUBLIC_PRODUCTION: 'false'
         run: npm run build
-      - name: Validate bilingual copy
+      - name: Validate multilingual content and embedded media
         run: node scripts/qa-copy.mjs
       - name: Validate Pages base path and assets
         run: node scripts/qa-pages.mjs
