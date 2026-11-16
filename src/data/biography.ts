@@ -2,7 +2,7 @@ import type {Lang} from './credits';
 
 export const biography = {
   ko: {
-    heroLine: '몽구스에서 베이스와 기타를 연주한 슈샤드의 솔로 음반과 제작 참여작.',
+    heroLine: '연주와 작곡, 프로듀싱을 오가며 음악을 만듭니다.',
     aboutParas: [
       '슈샤드(박희정)는 밴드 몽구스에서 베이스와 기타를 연주했다. 몽구스의 두 번째 음반 《Dancing Zoo》(2005)는 2006년 한국대중음악상 최우수 모던록 음반을 수상했다.',
       '2015년 첫 솔로 싱글 〈Lovestruck〉를 발표했다. 이듬해 발표한 〈처방전〉에서는 작곡과 편곡, 보컬과 악기 연주, 프로듀싱과 믹싱을 맡았다.',
@@ -16,7 +16,7 @@ export const biography = {
     ]
   },
   en: {
-    heroLine: 'Recordings with Mongoose, solo releases, and work with other artists.',
+    heroLine: 'Playing, composing, and producing music.',
     aboutParas: [
       'Suchard (Park Hee-jung) played bass and guitar in the Korean band Mongoose. Their second album, Dancing Zoo (2005), won Best Modern Rock Album at the 2006 Korean Music Awards.',
       'He released his first solo single, Lovestruck, in 2015. On Prescription (2016), he composed and arranged the music, performed vocals and instruments, and handled production and mixing.',
@@ -30,7 +30,7 @@ export const biography = {
     ]
   },
   ja: {
-    heroLine: 'Mongooseでの演奏、ソロ作品、他のアーティストとの制作・演奏参加。',
+    heroLine: '演奏、作曲、プロデュースを通して音楽をつくっています。',
     aboutParas: [
       'SUCHARD（パク・ヒジョン）は、韓国のバンドMongooseでベースとギターを担当。Mongooseのセカンドアルバム『Dancing Zoo』（2005年）は、2006年の韓国大衆音楽賞で最優秀モダンロック・アルバム賞を受賞した。',
       '2015年に初のソロ・シングル『Lovestruck』を発表。翌年の『처방전（Prescription）』では、作曲・編曲に加え、ボーカル、楽器演奏、プロデュース、ミキシングを手がけた。',

@@ -13,7 +13,7 @@ const rejectText = (path, phrases) => {
 };
 
 expectText('dist/ko/index.html', [
-  '몽구스에서 베이스와 기타를 연주한 슈샤드의 솔로 음반과 제작 참여작.',
+  '연주와 작곡, 프로듀싱을 오가며 음악을 만듭니다.',
   '〈Lovestruck〉',
   '최우수 모던록 음반을 수상했다.',
   '활동 기록',
@@ -23,7 +23,7 @@ expectText('dist/ko/index.html', [
   'WantedSansVariable.min.css'
 ]);
 expectText('dist/en/index.html', [
-  'Recordings with Mongoose, solo releases, and work with other artists.',
+  'Playing, composing, and producing music.',
   'He also worked on GUS',
   'Sports Seoul reported',
   'mailto:suchard337@gmail.com',
@@ -44,7 +44,7 @@ rejectText('dist/en/index.html', [
   'The 2006 Korean Music Awards recognition was awarded to Mongoose as a band.'
 ]);
 expectText('dist/ja/index.html', [
-  'Mongooseでの演奏、ソロ作品、他のアーティストとの制作・演奏参加。',
+  '演奏、作曲、プロデュースを通して音楽をつくっています。',
   '韓国大衆音楽賞',
   '主なディスコグラフィー',
   '活動記録',
